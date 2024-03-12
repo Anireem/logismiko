@@ -3,6 +3,7 @@ package com.logismiko.docs_auto_fill.controllers;
 import com.logismiko.docs_auto_fill.api.models.requests.OrganizationRequestDto;
 import com.logismiko.docs_auto_fill.api.models.responses.OrganizationResponseDto;
 import com.logismiko.docs_auto_fill.services.OrganizationService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -16,6 +17,7 @@ import java.util.List;
 @RequestMapping("/api/organizations")
 public class OrganizationController {
 
+    @Autowired
     private OrganizationService organizationService;
 
     @PostMapping
@@ -23,7 +25,7 @@ public class OrganizationController {
         return organizationService.addOrganization(organizationRequestDto);
     }
 
-    @GetMapping
+    @GetMapping("/{id}")
     public OrganizationResponseDto getOrganization(@PathVariable(value = "id") Long id) {
         return organizationService.getOrganization(id);
     }
@@ -33,7 +35,7 @@ public class OrganizationController {
         return organizationService.getAllOrganizations();
     }
 
-    @DeleteMapping
+    @DeleteMapping("/{id}")
     public void deleteOrganization(@PathVariable(value = "id") Long id) {
         organizationService.deleteOrganization(id);
     }

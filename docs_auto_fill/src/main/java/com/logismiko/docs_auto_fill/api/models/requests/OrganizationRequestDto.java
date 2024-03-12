@@ -1,8 +1,5 @@
 package com.logismiko.docs_auto_fill.api.models.requests;
 
-import jakarta.persistence.Entity;
-
-@Entity
 public class OrganizationRequestDto {
     private String comment;
     private String contactName;
