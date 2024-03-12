@@ -9,7 +9,6 @@ import com.logismiko.docs_auto_fill.services.factories.OrganizationResponseDtoFa
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.text.MessageFormat;
 import java.util.List;
 
 @Service
@@ -26,7 +25,7 @@ public class OrganizationService {
     public OrganizationResponseDto getOrganization(Long id) {
         return OrganizationResponseDtoFactory.make(
                 organizationRepository.findById(id).orElseThrow(
-                        () -> new RuntimeException(MessageFormat.format("Entity: {0} not found", id))
+                        () -> new RuntimeException("Entity: {0} not found".formatted(id))
                 )
         );
     }
