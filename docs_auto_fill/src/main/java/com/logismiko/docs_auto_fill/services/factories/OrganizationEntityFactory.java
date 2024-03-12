@@ -1,25 +1,25 @@
 package com.logismiko.docs_auto_fill.services.factories;
 
-import com.logismiko.docs_auto_fill.api.models.responses.OrganizationResponseDto;
+import com.logismiko.docs_auto_fill.api.models.requests.OrganizationRequestDto;
 import com.logismiko.docs_auto_fill.dao.entities.OrganizationEntity;
 import com.logismiko.docs_auto_fill.services.builders.OrganizationEntityBuilder;
 
 public final class OrganizationEntityFactory {
-    public static OrganizationEntity make(OrganizationResponseDto organizationResponseDto) {
+    public static OrganizationEntity make(OrganizationRequestDto organizationRequestDto) {
         return OrganizationEntityBuilder.anOrganizationEntity()
-                .withComment(organizationResponseDto.getComment())
-                .withContactName(organizationResponseDto.getContactName())
-                .withEmail(organizationResponseDto.getEmail())
-                .withId(organizationResponseDto.getId())
-                .withInn(organizationResponseDto.getInn())
-                .withKpp(organizationResponseDto.getKpp())
-                .withLongName(organizationResponseDto.getLongName())
-                .withOgrn(organizationResponseDto.getOgrn())
-                .withOkpo(organizationResponseDto.getOkpo())
-                .withOkved(organizationResponseDto.getOkved())
-                .withPhone(organizationResponseDto.getPhone())
-                .withShortName(organizationResponseDto.getShortName())
-                .withView(organizationResponseDto.getView())
+                .withComment(organizationRequestDto.getComment())
+                .withContactName(organizationRequestDto.getContactName())
+                .withEmail(organizationRequestDto.getEmail())
+                .withId(organizationRequestDto.getId())
+                .withInn(organizationRequestDto.getInn())
+                .withKpp(organizationRequestDto.getKpp())
+                .withLongName(organizationRequestDto.getLongName())
+                .withOgrn(organizationRequestDto.getOgrn())
+                .withOkpo(organizationRequestDto.getOkpo())
+                .withOkved(organizationRequestDto.getOkved())
+                .withPhone(organizationRequestDto.getPhone())
+                .withShortName(organizationRequestDto.getShortName())
+                .withView(organizationRequestDto.getView())
                 .build();
     }
 }
