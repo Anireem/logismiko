@@ -8,20 +8,20 @@ import jakarta.persistence.Id;
 @Entity
 public class OrganizationEntity {
 
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-    private String view;
-    private String shortName;
-    private String longName;
-    private String inn;
-    private Integer kpp;
-    private String okved;
-    private String okpo;
-    private Integer ogrn;
-    private String email;
-    private String phone;
     private String comment;
     private String contactName;
+    private String email;
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+    private String inn;
+    private Integer kpp;
+    private String longName;
+    private Integer ogrn;
+    private String okpo;
+    private String okved;
+    private String phone;
+    private String shortName;
+    private String view;
 
     //<editor-fold desc="Getters and Setters">
     public Long getId() {
