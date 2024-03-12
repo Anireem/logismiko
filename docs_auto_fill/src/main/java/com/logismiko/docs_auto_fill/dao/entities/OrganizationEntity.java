@@ -23,6 +23,7 @@ public class OrganizationEntity {
     private String comment;
     private String contactName;
 
+    //<editor-fold desc="Getters and Setters">
     public Long getId() {
         return id;
     }
@@ -126,4 +127,5 @@ public class OrganizationEntity {
     public void setContactName(String contactName) {
         this.contactName = contactName;
     }
+    //</editor-fold>
 }
