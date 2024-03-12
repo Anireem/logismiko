@@ -4,8 +4,8 @@ import com.logismiko.docs_auto_fill.api.models.responses.OrganizationResponseDto
 import com.logismiko.docs_auto_fill.dao.entities.OrganizationEntity;
 import com.logismiko.docs_auto_fill.services.builders.OrganizationResponseDtoBuilder;
 
-public class OrganizationResponseDtoFactory {
-    public OrganizationResponseDto make(OrganizationEntity organizationEntity) {
+public final class OrganizationResponseDtoFactory {
+    public static OrganizationResponseDto make(OrganizationEntity organizationEntity) {
         return OrganizationResponseDtoBuilder.anOrganizationResponseDto()
                 .withComment(organizationEntity.getComment())
                 .withContactName(organizationEntity.getContactName())
