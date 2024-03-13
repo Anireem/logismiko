@@ -10,7 +10,7 @@ public final class OrganizationEntityFactory {
         throw new IllegalStateException("Utility class");
     }
 
-    public static OrganizationEntity make(OrganizationRequestDto organizationRequestDto) {
+    public static OrganizationEntity makeOrganizationEntity(OrganizationRequestDto organizationRequestDto) {
         return OrganizationEntityBuilder.anOrganizationEntity()
                 .withComment(organizationRequestDto.comment())
                 .withContactName(organizationRequestDto.contactName())
