@@ -16,21 +16,27 @@ import static org.springframework.http.HttpStatus.NOT_FOUND;
 
 /**
  * Represents a service to work with Organizations.
+ * @param organizationRepository Repository for storing
+ * and retrieving data by organization
  */
 @Service
-public class OrganizationService {
-
-    @Autowired
-    private OrganizationRepository organizationRepository;
+public record OrganizationService(
+        @Autowired OrganizationRepository organizationRepository
+) {
 
     /**
      * Creates Organization.
      * @param organizationRequestDto DTO to create an Organization.
      * @return Created Organization response DTO.
      */
-    public OrganizationResponseDto addOrganization(OrganizationRequestDto organizationRequestDto) {
-        OrganizationEntity organizationEntity = OrganizationEntityFactory.makeOrganizationEntity(organizationRequestDto);
-        return OrganizationResponseDtoFactory.makeOrganizationResponseDto(organizationRepository.save(organizationEntity));
+    public OrganizationResponseDto addOrganization(
+            OrganizationRequestDto organizationRequestDto
+    ) {
+        OrganizationEntity organizationEntity = OrganizationEntityFactory
+                .makeOrganizationEntity(organizationRequestDto);
+        return OrganizationResponseDtoFactory.makeOrganizationResponseDto(
+                organizationRepository.save(organizationEntity)
+        );
     }
 
     /**
@@ -40,9 +46,11 @@ public class OrganizationService {
      */
     public OrganizationResponseDto getOrganization(Long id) {
         return OrganizationResponseDtoFactory.makeOrganizationResponseDto(
-                organizationRepository.findById(id).orElseThrow(
-                        () -> new ResponseStatusException(NOT_FOUND, String.format("Entity: %s not found", 1L))
+            organizationRepository.findById(id).orElseThrow(
+                () -> new ResponseStatusException(
+                        NOT_FOUND, String.format("Entity: %s not found", 1L)
                 )
+            )
         );
     }
 
@@ -53,7 +61,9 @@ public class OrganizationService {
     public List<OrganizationResponseDto> getAllOrganizations() {
         return organizationRepository.findAll()
                 .stream()
-                .map(OrganizationResponseDtoFactory::makeOrganizationResponseDto)
+                .map(
+                    OrganizationResponseDtoFactory::makeOrganizationResponseDto
+                )
                 .toList();
     }
 
@@ -62,9 +72,13 @@ public class OrganizationService {
      * @param id ID of the organization to be deleted.
      */
     public void deleteOrganization(Long id) {
-        if (organizationRepository.existsById(id))
+        if (organizationRepository.existsById(id)) {
             organizationRepository.deleteById(id);
-        else
-            throw new ResponseStatusException(NOT_FOUND, String.format("Entity: %s not found", 1L));
+        } else {
+            throw new ResponseStatusException(
+                    NOT_FOUND,
+                    String.format("Entity: %s not found", 1L)
+            );
+        }
     }
 }

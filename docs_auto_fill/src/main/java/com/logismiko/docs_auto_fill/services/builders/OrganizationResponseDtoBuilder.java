@@ -2,8 +2,6 @@ package com.logismiko.docs_auto_fill.services.builders;
 
 import com.logismiko.docs_auto_fill.api.models.responses.OrganizationResponseDto;
 
-import static com.logismiko.docs_auto_fill.api.constants.ApiRoutes.Error.UTILITY_CLASS;
-
 public final class OrganizationResponseDtoBuilder {
     private String comment;
     private String contactName;
@@ -20,7 +18,6 @@ public final class OrganizationResponseDtoBuilder {
     private String view;
 
     private OrganizationResponseDtoBuilder() {
-        throw new IllegalStateException(UTILITY_CLASS);
     }
 
     public static OrganizationResponseDtoBuilder anOrganizationResponseDto() {

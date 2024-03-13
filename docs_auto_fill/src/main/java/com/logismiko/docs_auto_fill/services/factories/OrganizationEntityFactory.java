@@ -4,12 +4,9 @@ import com.logismiko.docs_auto_fill.api.models.requests.OrganizationRequestDto;
 import com.logismiko.docs_auto_fill.dao.entities.OrganizationEntity;
 import com.logismiko.docs_auto_fill.services.builders.OrganizationEntityBuilder;
 
-import static com.logismiko.docs_auto_fill.api.constants.ApiRoutes.Error.UTILITY_CLASS;
-
 public final class OrganizationEntityFactory {
 
     private OrganizationEntityFactory() {
-        throw new IllegalStateException(UTILITY_CLASS);
     }
 
     public static OrganizationEntity makeOrganizationEntity(OrganizationRequestDto organizationRequestDto) {
