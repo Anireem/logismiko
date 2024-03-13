@@ -81,7 +81,7 @@ public record OrganizationController(
      */
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteOrganization(
-            @PathVariable(value = "id") Long id
+            @PathVariable(value = "id") final Long id
     ) {
         organizationService.deleteOrganization(id);
         return ResponseEntity.noContent().build();

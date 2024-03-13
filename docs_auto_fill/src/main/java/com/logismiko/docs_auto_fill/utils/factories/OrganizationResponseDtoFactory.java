@@ -1,8 +1,8 @@
-package com.logismiko.docs_auto_fill.services.factories;
+package com.logismiko.docs_auto_fill.utils.factories;
 
 import com.logismiko.docs_auto_fill.api.models.responses.OrganizationResponseDto;
 import com.logismiko.docs_auto_fill.dao.entities.OrganizationEntity;
-import com.logismiko.docs_auto_fill.services.builders.OrganizationResponseDtoBuilder;
+import com.logismiko.docs_auto_fill.utils.builders.OrganizationResponseDtoBuilder;
 
 public final class OrganizationResponseDtoFactory {
 

@@ -1,4 +1,4 @@
-package com.logismiko.docs_auto_fill.services.builders;
+package com.logismiko.docs_auto_fill.utils.builders;
 
 import com.logismiko.docs_auto_fill.api.models.responses.OrganizationResponseDto;
 

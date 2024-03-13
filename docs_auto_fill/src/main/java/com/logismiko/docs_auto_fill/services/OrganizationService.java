@@ -4,8 +4,8 @@ import com.logismiko.docs_auto_fill.api.models.requests.OrganizationRequestDto;
 import com.logismiko.docs_auto_fill.api.models.responses.OrganizationResponseDto;
 import com.logismiko.docs_auto_fill.dao.entities.OrganizationEntity;
 import com.logismiko.docs_auto_fill.dao.repositories.OrganizationRepository;
-import com.logismiko.docs_auto_fill.services.factories.OrganizationEntityFactory;
-import com.logismiko.docs_auto_fill.services.factories.OrganizationResponseDtoFactory;
+import com.logismiko.docs_auto_fill.utils.factories.OrganizationEntityFactory;
+import com.logismiko.docs_auto_fill.utils.factories.OrganizationResponseDtoFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
@@ -30,7 +30,7 @@ public record OrganizationService(
      * @return Created Organization response DTO.
      */
     public OrganizationResponseDto addOrganization(
-            OrganizationRequestDto organizationRequestDto
+            final OrganizationRequestDto organizationRequestDto
     ) {
         OrganizationEntity organizationEntity = OrganizationEntityFactory
                 .makeOrganizationEntity(organizationRequestDto);
@@ -44,7 +44,7 @@ public record OrganizationService(
      * @param id Organization ID.
      * @return Organization response DTO.
      */
-    public OrganizationResponseDto getOrganization(Long id) {
+    public OrganizationResponseDto getOrganization(final Long id) {
         return OrganizationResponseDtoFactory.makeOrganizationResponseDto(
             organizationRepository.findById(id).orElseThrow(
                 () -> new ResponseStatusException(
@@ -71,7 +71,7 @@ public record OrganizationService(
      * Delete an organization, if it exists.
      * @param id ID of the organization to be deleted.
      */
-    public void deleteOrganization(Long id) {
+    public void deleteOrganization(final Long id) {
         if (organizationRepository.existsById(id)) {
             organizationRepository.deleteById(id);
         } else {
