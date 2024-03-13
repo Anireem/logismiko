@@ -2,6 +2,8 @@ package com.logismiko.docs_auto_fill.services.builders;
 
 import com.logismiko.docs_auto_fill.dao.entities.OrganizationEntity;
 
+import static com.logismiko.docs_auto_fill.api.constants.ApiRoutes.Error.UTILITY_CLASS;
+
 public final class OrganizationEntityBuilder {
     private Long id;
     private String view;
@@ -18,6 +20,7 @@ public final class OrganizationEntityBuilder {
     private String contactName;
 
     private OrganizationEntityBuilder() {
+        throw new IllegalStateException(UTILITY_CLASS);
     }
 
     public static OrganizationEntityBuilder anOrganizationEntity() {
