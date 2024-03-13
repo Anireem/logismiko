@@ -1,4 +1,4 @@
-package com.logismiko.docs_auto_fill.api;
+package com.logismiko.docs_auto_fill.api.endpoints;
 
 import com.logismiko.docs_auto_fill.api.models.requests.OrganizationRequestDto;
 import com.logismiko.docs_auto_fill.api.models.responses.OrganizationResponseDto;
@@ -8,18 +8,16 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.util.UriComponentsBuilder;
 
 /**
- * Represents an endpoint to work with vessel Organization data.
+ * Represents an endpoint to work with Organization data.
  */
 @Tag(
         name = "Endpoint для работы с организациями",
         description = "REST API для сохранения и извлечения данных по организациям"
 )
-public interface OrganizationEnpoint {
+public interface OrganizationEndpoint {
 
     @Operation(summary = "Добавляет организацию в базу данных")
     @ApiResponse(
@@ -30,7 +28,7 @@ public interface OrganizationEnpoint {
         responseCode = "400",
         description = "Bad Request - неправильный формат body."
     )
-    ResponseEntity<Void> addOrganization(@RequestBody OrganizationRequestDto organizationRequestDto, UriComponentsBuilder ucb);
+    ResponseEntity<Void> addOrganization(OrganizationRequestDto organizationRequestDto, UriComponentsBuilder ucb);
 
     @Operation(summary = "Возвращает организацию по ID.")
     @ApiResponse(
@@ -61,5 +59,5 @@ public interface OrganizationEnpoint {
             responseCode = "404",
             description = "Not found - организации с таким ID нет в базе."
     )
-    ResponseEntity<Void> deleteOrganization(@PathVariable(value = "id") Long id);
+    ResponseEntity<Void> deleteOrganization(Long id);
 }
