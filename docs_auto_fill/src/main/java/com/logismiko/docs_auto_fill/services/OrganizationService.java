@@ -14,17 +14,30 @@ import java.util.List;
 
 import static org.springframework.http.HttpStatus.NOT_FOUND;
 
+/**
+ * Represents a service to work with Organizations.
+ */
 @Service
 public class OrganizationService {
 
     @Autowired
     private OrganizationRepository organizationRepository;
 
+    /**
+     * Creates Organization.
+     * @param organizationRequestDto DTO to create an Organization.
+     * @return Created Organization response DTO.
+     */
     public OrganizationResponseDto addOrganization(OrganizationRequestDto organizationRequestDto) {
         OrganizationEntity organizationEntity = OrganizationEntityFactory.makeOrganizationEntity(organizationRequestDto);
         return OrganizationResponseDtoFactory.makeOrganizationResponseDto(organizationRepository.save(organizationEntity));
     }
 
+    /**
+     * Retrieves the Organization by ID.
+     * @param id Organization ID.
+     * @return Organization response DTO.
+     */
     public OrganizationResponseDto getOrganization(Long id) {
         return OrganizationResponseDtoFactory.makeOrganizationResponseDto(
                 organizationRepository.findById(id).orElseThrow(
@@ -33,6 +46,10 @@ public class OrganizationService {
         );
     }
 
+    /**
+     * Get all Organizations from database.
+     * @return List of Organization DTOs.
+     */
     public List<OrganizationResponseDto> getAllOrganizations() {
         return organizationRepository.findAll()
                 .stream()
