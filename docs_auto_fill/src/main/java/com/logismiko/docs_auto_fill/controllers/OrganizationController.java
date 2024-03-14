@@ -30,7 +30,7 @@ public class OrganizationController
     private final OrganizationService organizationService;
 
     /**
-     * Конструктор, параметры заполняются с помощью Dependency Injection
+     * Конструктор, параметры заполняются с помощью Dependency Injection.
      * @param organizationService Слой сервиса для работы с организациями.
      */
     @Autowired

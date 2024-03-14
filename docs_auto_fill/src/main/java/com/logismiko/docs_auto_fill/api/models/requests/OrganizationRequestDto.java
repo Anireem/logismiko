@@ -1,13 +1,14 @@
 package com.logismiko.docs_auto_fill.api.models.requests;
 
 import io.swagger.v3.oas.annotations.media.Schema;
+import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 
 import static io.swagger.v3.oas.annotations.media.Schema.RequiredMode.REQUIRED;
 
 /**
- * OrganizationEntity request declaration.
+ * DTO для запроса, содержит данные OrganizationEntity.
  */
 public record OrganizationRequestDto(
     @Schema(description = "Комментарий", example = "Не приоритетный клиент")
@@ -16,6 +17,7 @@ public record OrganizationRequestDto(
     @Schema(description = "Имя контакта", example = "Миллер Алексей")
     String contactName,
 
+    @Email(message = "Email должен быть в правильном формате")
     @Schema(description = "Email", example = "mail@gazprom.ru")
     String email,
 
@@ -46,8 +48,8 @@ public record OrganizationRequestDto(
     @Schema(description = "Сокращенное имя", example = "ПАО \"Газпром\"")
     String shortName,
 
-    @NotBlank(message = "Vue is required field")
-    @NotNull(message = "Vue is required field")
+    @NotBlank(message = "Vue - обязательно к заполнению")
+    @NotNull(message = "Vue - обязательно к заполнению")
     @Schema(
         description = "Представление",
         example = "Газпром",

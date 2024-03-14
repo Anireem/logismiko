@@ -17,7 +17,7 @@ import java.util.List;
 import static org.springframework.http.HttpStatus.NOT_FOUND;
 
 /**
- * Represents a service to work with Organizations.
+ * Представляет сервисный слой для работы с организациями.
  */
 @Service
 public class OrganizationService {
@@ -32,9 +32,9 @@ public class OrganizationService {
     }
 
     /**
-     * Creates Organization.
-     * @param organizationRequestDto DTO to create an Organization.
-     * @return Created Organization response DTO.
+     * Добавляет организацию в базу данных.
+     * @param organizationRequestDto DTO для создания организации.
+     * @return DTO вновь созданной организации.
      */
     public OrganizationResponseDto addOrganization(
         final OrganizationRequestDto organizationRequestDto
@@ -47,9 +47,9 @@ public class OrganizationService {
     }
 
     /**
-     * Retrieves the Organization by ID.
-     * @param id Organization ID.
-     * @return Organization response DTO.
+     * Извлекает организацию из базы данных по ID.
+     * @param id ID организации.
+     * @return DTO найденной организации.
      */
     public OrganizationResponseDto getOrganization(final Long id) {
         return OrganizationResponseDtoFactory.makeOrganizationResponseDto(
@@ -62,8 +62,8 @@ public class OrganizationService {
     }
 
     /**
-     * Get all Organizations from database.
-     * @return List of Organization DTOs.
+     * Извлекает весь список организаций из базы данных.
+     * @return список из DTO организаций.
      */
     public List<OrganizationResponseDto> getAllOrganizations() {
         return organizationRepository.findAll()
@@ -75,8 +75,8 @@ public class OrganizationService {
     }
 
     /**
-     * Delete an organization, if it exists.
-     * @param id ID of the organization to be deleted.
+     * Удяляет организацию из базы, если она существует.
+     * @param id ID подлежащей удалению организации.
      */
     public void deleteOrganization(final Long id) {
         if (organizationRepository.existsById(id)) {

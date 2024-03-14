@@ -3,7 +3,7 @@ package com.logismiko.docs_auto_fill.api.models.responses;
 import io.swagger.v3.oas.annotations.media.Schema;
 
 /**
- * OrganizationEntity response declaration.
+ * DTO для ответа, содержит данные OrganizationEntity.
  */
 public record OrganizationResponseDto(
     @Schema(description = "Комментарий", example = "Не приоритетный клиент")

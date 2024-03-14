@@ -15,7 +15,6 @@ public class OrganizationEntity {
 
     private String contactName;
 
-    @Email
     private String email;
 
     @Id

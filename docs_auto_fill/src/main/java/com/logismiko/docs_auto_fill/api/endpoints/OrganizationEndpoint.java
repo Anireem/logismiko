@@ -11,7 +11,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.util.UriComponentsBuilder;
 
 /**
- * Represents an endpoint to work with Organization data.
+ * Представляет endpoint для работы с организациями.
+ * Интерфейс для реализации в контроллере, работающим с организациями.
  */
 @Tag(
     name = "Endpoint для работы с организациями",
