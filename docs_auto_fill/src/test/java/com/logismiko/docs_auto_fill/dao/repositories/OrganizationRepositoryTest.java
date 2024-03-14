@@ -9,10 +9,12 @@ import org.springframework.boot.jdbc.EmbeddedDatabaseConnection;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 
+import java.util.List;
+
 @DataJpaTest
 @AutoConfigureTestDatabase(connection = EmbeddedDatabaseConnection.H2)
 class OrganizationRepositoryTest {
-    private OrganizationRepository organizationRepository;
+    private final OrganizationRepository organizationRepository;
 
     @Autowired
     public OrganizationRepositoryTest(OrganizationRepository organizationRepository) {
@@ -21,7 +23,6 @@ class OrganizationRepositoryTest {
 
     @Test
     void OrganizationRepository_Save_ReturnSavedOrganization() {
-        //Arrange
         final OrganizationEntity organizationEntity =
             OrganizationEntityBuilder
                 .anOrganizationEntity()
@@ -38,11 +39,44 @@ class OrganizationRepositoryTest {
                 .withShortName("ПАО \"Газпром\"")
                 .withView("Газпром")
                 .build();
-        //Act
+
         final OrganizationEntity savedOrganizationEntity =
             organizationRepository.save(organizationEntity);
-        //Assert
+
         Assertions.assertThat(savedOrganizationEntity).isNotNull();
-        Assertions.assertThat(savedOrganizationEntity.getId()).isGreaterThan(0);
+        Assertions.assertThat(savedOrganizationEntity.getId()).isPositive();
+    }
+
+    @Test
+    void OrganizationRepository_GetALL_ReturnMoreThenOneOrganization() {
+        final OrganizationEntity google = OrganizationEntityBuilder.anOrganizationEntity()
+            .withView("Google")
+            .build();
+        final OrganizationEntity apple = OrganizationEntityBuilder.anOrganizationEntity()
+            .withView("Apple")
+            .build();
+
+        organizationRepository.save(google);
+        organizationRepository.save(apple);
+
+        List<OrganizationEntity> organizationEntities = organizationRepository.findAll();
+        int organizationEntitiesSize = organizationEntities.size();
+        Assertions.assertThat(organizationEntities).isNotNull();
+        Assertions.assertThat(organizationEntitiesSize).isEqualTo(2);
+    }
+
+    @Test
+    void OrganizationRepository_FindById_ReturnOrganization() {
+        final OrganizationEntity organizationEntity =
+            OrganizationEntityBuilder.anOrganizationEntity()
+            .withView("Microsoft")
+            .build();
+
+        OrganizationEntity savedOrganizationEntity =
+            organizationRepository.save(organizationEntity);
+        OrganizationEntity organizationEntityFromDatabase =
+            organizationRepository.findById(savedOrganizationEntity.getId()).get();
+
+        Assertions.assertThat(organizationEntityFromDatabase).isNotNull();
     }
 }
