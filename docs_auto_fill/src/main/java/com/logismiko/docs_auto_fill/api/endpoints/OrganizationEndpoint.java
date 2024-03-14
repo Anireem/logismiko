@@ -32,8 +32,8 @@ public interface OrganizationEndpoint {
         description = "Bad Request - неправильный формат body."
     )
     ResponseEntity<Void> addOrganization(
-            OrganizationRequestDto organizationRequestDto,
-            UriComponentsBuilder ucb
+        OrganizationRequestDto organizationRequestDto,
+        UriComponentsBuilder ucb
     );
 
     /**
@@ -44,7 +44,7 @@ public interface OrganizationEndpoint {
         responseCode = "200",
         description = "Success - организация успешно получена.",
         content = {@Content(
-                schema = @Schema(implementation = OrganizationResponseDto.class)
+            schema = @Schema(implementation = OrganizationResponseDto.class)
         )}
     )
     @ApiResponse(

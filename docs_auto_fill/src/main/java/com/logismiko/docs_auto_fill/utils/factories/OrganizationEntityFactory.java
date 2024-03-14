@@ -11,18 +11,18 @@ public final class OrganizationEntityFactory {
 
     public static OrganizationEntity makeOrganizationEntity(OrganizationRequestDto organizationRequestDto) {
         return OrganizationEntityBuilder.anOrganizationEntity()
-                .withComment(organizationRequestDto.comment())
-                .withContactName(organizationRequestDto.contactName())
-                .withEmail(organizationRequestDto.email())
-                .withInn(organizationRequestDto.inn())
-                .withKpp(organizationRequestDto.kpp())
-                .withLongName(organizationRequestDto.longName())
-                .withOgrn(organizationRequestDto.ogrn())
-                .withOkpo(organizationRequestDto.okpo())
-                .withOkved(organizationRequestDto.okved())
-                .withPhone(organizationRequestDto.phone())
-                .withShortName(organizationRequestDto.shortName())
-                .withView(organizationRequestDto.view())
-                .build();
+            .withComment(organizationRequestDto.comment())
+            .withContactName(organizationRequestDto.contactName())
+            .withEmail(organizationRequestDto.email())
+            .withInn(organizationRequestDto.inn())
+            .withKpp(organizationRequestDto.kpp())
+            .withLongName(organizationRequestDto.longName())
+            .withOgrn(organizationRequestDto.ogrn())
+            .withOkpo(organizationRequestDto.okpo())
+            .withOkved(organizationRequestDto.okved())
+            .withPhone(organizationRequestDto.phone())
+            .withShortName(organizationRequestDto.shortName())
+            .withView(organizationRequestDto.view())
+            .build();
     }
 }

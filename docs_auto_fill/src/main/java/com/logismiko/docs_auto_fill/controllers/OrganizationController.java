@@ -26,8 +26,8 @@ import static com.logismiko.docs_auto_fill.api.constants.ApiRoutes.Organization.
 @RestController
 @RequestMapping(ORGANIZATION_CONTEXT_PATH)
 public class OrganizationController implements OrganizationEndpoint {
-
-    @Autowired OrganizationService organizationService;
+    @Autowired
+    OrganizationService organizationService;
 
     /**
      * Adds Organization to database.

@@ -29,12 +29,12 @@ public class OrganizationService {
      * @return Created Organization response DTO.
      */
     public OrganizationResponseDto addOrganization(
-            final OrganizationRequestDto organizationRequestDto
+        final OrganizationRequestDto organizationRequestDto
     ) {
         OrganizationEntity organizationEntity = OrganizationEntityFactory
-                .makeOrganizationEntity(organizationRequestDto);
+            .makeOrganizationEntity(organizationRequestDto);
         return OrganizationResponseDtoFactory.makeOrganizationResponseDto(
-                organizationRepository.save(organizationEntity)
+            organizationRepository.save(organizationEntity)
         );
     }
 
@@ -47,7 +47,7 @@ public class OrganizationService {
         return OrganizationResponseDtoFactory.makeOrganizationResponseDto(
             organizationRepository.findById(id).orElseThrow(
                 () -> new ResponseStatusException(
-                        NOT_FOUND, String.format("Entity: %s not found", 1L)
+                    NOT_FOUND, String.format("Entity: %s not found", 1L)
                 )
             )
         );
@@ -59,11 +59,11 @@ public class OrganizationService {
      */
     public List<OrganizationResponseDto> getAllOrganizations() {
         return organizationRepository.findAll()
-                .stream()
-                .map(
-                    OrganizationResponseDtoFactory::makeOrganizationResponseDto
-                )
-                .toList();
+            .stream()
+            .map(
+                OrganizationResponseDtoFactory::makeOrganizationResponseDto
+            )
+            .toList();
     }
 
     /**
@@ -75,8 +75,8 @@ public class OrganizationService {
             organizationRepository.deleteById(id);
         } else {
             throw new ResponseStatusException(
-                    NOT_FOUND,
-                    String.format("Entity: %s not found", 1L)
+                NOT_FOUND,
+                String.format("Entity: %s not found", 1L)
             );
         }
     }

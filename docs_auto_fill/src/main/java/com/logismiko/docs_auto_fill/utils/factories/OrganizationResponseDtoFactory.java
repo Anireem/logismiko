@@ -11,19 +11,19 @@ public final class OrganizationResponseDtoFactory {
 
     public static OrganizationResponseDto makeOrganizationResponseDto(OrganizationEntity organizationEntity) {
         return OrganizationResponseDtoBuilder.anOrganizationResponseDto()
-                .withComment(organizationEntity.getComment())
-                .withContactName(organizationEntity.getContactName())
-                .withEmail(organizationEntity.getEmail())
-                .withId(organizationEntity.getId())
-                .withInn(organizationEntity.getInn())
-                .withKpp(organizationEntity.getKpp())
-                .withLongName(organizationEntity.getLongName())
-                .withOgrn(organizationEntity.getOgrn())
-                .withOkpo(organizationEntity.getOkpo())
-                .withOkved(organizationEntity.getOkved())
-                .withPhone(organizationEntity.getPhone())
-                .withShortName(organizationEntity.getShortName())
-                .withView(organizationEntity.getView())
-                .build();
+            .withComment(organizationEntity.getComment())
+            .withContactName(organizationEntity.getContactName())
+            .withEmail(organizationEntity.getEmail())
+            .withId(organizationEntity.getId())
+            .withInn(organizationEntity.getInn())
+            .withKpp(organizationEntity.getKpp())
+            .withLongName(organizationEntity.getLongName())
+            .withOgrn(organizationEntity.getOgrn())
+            .withOkpo(organizationEntity.getOkpo())
+            .withOkved(organizationEntity.getOkved())
+            .withPhone(organizationEntity.getPhone())
+            .withShortName(organizationEntity.getShortName())
+            .withView(organizationEntity.getView())
+            .build();
     }
 }

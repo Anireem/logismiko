@@ -12,21 +12,33 @@ import jakarta.validation.constraints.NotBlank;
  */
 @Entity
 public class OrganizationEntity {
-
     private String comment;
+
     private String contactName;
+
     @Email
     private String email;
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     private String inn;
+
     private String kpp;
+
     private String longName;
+
     private String ogrn;
+
     private String okpo;
+
     private String okved;
+
     private String phone;
+
     private String shortName;
+
     @NotBlank
     private String view;
 
