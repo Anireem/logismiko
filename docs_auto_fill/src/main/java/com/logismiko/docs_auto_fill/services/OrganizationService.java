@@ -6,6 +6,8 @@ import com.logismiko.docs_auto_fill.dao.entities.OrganizationEntity;
 import com.logismiko.docs_auto_fill.dao.repositories.OrganizationRepository;
 import com.logismiko.docs_auto_fill.utils.factories.OrganizationEntityFactory;
 import com.logismiko.docs_auto_fill.utils.factories.OrganizationResponseDtoFactory;
+import jakarta.validation.Valid;
+import jakarta.validation.Validator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
@@ -20,8 +22,14 @@ import static org.springframework.http.HttpStatus.NOT_FOUND;
 @Service
 public class OrganizationService {
 
-    @Autowired
     OrganizationRepository organizationRepository;
+
+    @Autowired
+    public OrganizationService(
+        OrganizationRepository organizationRepository
+    ) {
+        this.organizationRepository = organizationRepository;
+    }
 
     /**
      * Creates Organization.

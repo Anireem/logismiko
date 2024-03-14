@@ -12,13 +12,15 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 @DataJpaTest
 @AutoConfigureTestDatabase(connection = EmbeddedDatabaseConnection.H2)
 class OrganizationRepositoryTest {
+    private OrganizationRepository organizationRepository;
 
     @Autowired
-    private OrganizationRepository organizationRepository;
+    public OrganizationRepositoryTest(OrganizationRepository organizationRepository) {
+        this.organizationRepository = organizationRepository;
+    }
 
     @Test
     void OrganizationRepository_Save_ReturnSavedOrganization() {
-
         //Arrange
         final OrganizationEntity organizationEntity =
             OrganizationEntityBuilder
@@ -48,27 +50,16 @@ class OrganizationRepositoryTest {
 
     @Test
     void OrganizationRepository_Save_OrganizationWithoutViewShouldNotSave() {
-
         //Arrange
         final OrganizationEntity organizationEntity =
-                OrganizationEntityBuilder
-                        .anOrganizationEntity()
-                        .withComment("Не приоритетный клиент")
-                        .withContactName("Миллер Алексей Борисович")
-                        .withEmail("mail@gazprom.ru")
-                        .withInn("7736050003")
-                        .withKpp("781401001")
-                        .withLongName("ПУБЛИЧНОЕ АКЦИОНЕРНОЕ ОБЩЕСТВО \"ГАЗПРОМ\"")
-                        .withOgrn("1027700070518")
-                        .withOkpo("00040778")
-                        .withOkved("46.71")
-                        .withPhone("8-495-464-41-12")
-                        .withShortName("ПАО \"Газпром\"")
-                        .build();
+            OrganizationEntityBuilder
+                .anOrganizationEntity()
+                .withShortName("ПАО \"Газпром\"")
+                .build();
 
         //Act
         final OrganizationEntity savedOrganizationEntity =
-                organizationRepository.save(organizationEntity);
+            organizationRepository.save(organizationEntity);
 
         //Assert
         Assertions.assertThat(savedOrganizationEntity).isNotNull();

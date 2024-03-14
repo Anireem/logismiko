@@ -1,6 +1,8 @@
 package com.logismiko.docs_auto_fill.api.models.requests;
 
 import io.swagger.v3.oas.annotations.media.Schema;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 
 import static io.swagger.v3.oas.annotations.media.Schema.RequiredMode.REQUIRED;
 
@@ -23,8 +25,10 @@ public record OrganizationRequestDto(
     @Schema(description = "КПП", example = "781401001")
     String kpp,
 
-    @Schema(description = "Полное имя",
-        example = "ПУБЛИЧНОЕ АКЦИОНЕРНОЕ ОБЩЕСТВО \"ГАЗПРОМ\"")
+    @Schema(
+        description = "Полное имя",
+        example = "ПУБЛИЧНОЕ АКЦИОНЕРНОЕ ОБЩЕСТВО \"ГАЗПРОМ\""
+    )
     String longName,
 
     @Schema(description = "ОГРН", example = "1027700070518")
@@ -42,9 +46,13 @@ public record OrganizationRequestDto(
     @Schema(description = "Сокращенное имя", example = "ПАО \"Газпром\"")
     String shortName,
 
-    @Schema(description = "Представление",
+    @NotBlank(message = "Vue is required field")
+    @NotNull(message = "Vue is required field")
+    @Schema(
+        description = "Представление",
         example = "Газпром",
-        requiredMode = REQUIRED)
+        requiredMode = REQUIRED
+    )
     String view
 ) {
 }

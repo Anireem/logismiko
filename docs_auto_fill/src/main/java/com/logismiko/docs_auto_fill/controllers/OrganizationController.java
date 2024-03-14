@@ -4,6 +4,7 @@ import com.logismiko.docs_auto_fill.api.endpoints.OrganizationEndpoint;
 import com.logismiko.docs_auto_fill.api.models.requests.OrganizationRequestDto;
 import com.logismiko.docs_auto_fill.api.models.responses.OrganizationResponseDto;
 import com.logismiko.docs_auto_fill.services.OrganizationService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -26,8 +27,13 @@ import static com.logismiko.docs_auto_fill.api.constants.ApiRoutes.Organization.
 @RestController
 @RequestMapping(ORGANIZATION_CONTEXT_PATH)
 public class OrganizationController implements OrganizationEndpoint {
+
+    final OrganizationService organizationService;
+
     @Autowired
-    OrganizationService organizationService;
+    public OrganizationController(OrganizationService organizationService) {
+        this.organizationService = organizationService;
+    }
 
     /**
      * Adds Organization to database.
@@ -38,15 +44,17 @@ public class OrganizationController implements OrganizationEndpoint {
     @PostMapping
     @Override
     public ResponseEntity<Void> addOrganization(
-            @RequestBody final OrganizationRequestDto organizationRequestDto,
-            final UriComponentsBuilder ucb
+        @RequestBody
+        @Valid
+        final OrganizationRequestDto organizationRequestDto,
+        final UriComponentsBuilder ucb
     ) {
         OrganizationResponseDto organizationResponseDto =
-                organizationService.addOrganization(organizationRequestDto);
+            organizationService.addOrganization(organizationRequestDto);
         URI location = ucb
-                .path(ORGANIZATION_CONTEXT_PATH + "/{id}")
-                .buildAndExpand(organizationResponseDto.id())
-                .toUri();
+            .path(ORGANIZATION_CONTEXT_PATH + "/{id}")
+            .buildAndExpand(organizationResponseDto.id())
+            .toUri();
         return ResponseEntity.created(location).build();
     }
 
@@ -58,7 +66,8 @@ public class OrganizationController implements OrganizationEndpoint {
     @GetMapping("/{id}")
     @Override
     public ResponseEntity<OrganizationResponseDto> getOrganization(
-            @PathVariable(value = "id") final Long id
+        @PathVariable(value = "id")
+        final Long id
     ) {
         return ResponseEntity.ok(organizationService.getOrganization(id));
     }
@@ -80,7 +89,8 @@ public class OrganizationController implements OrganizationEndpoint {
      */
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteOrganization(
-            @PathVariable(value = "id") final Long id
+        @PathVariable(value = "id")
+        final Long id
     ) {
         organizationService.deleteOrganization(id);
         return ResponseEntity.noContent().build();

@@ -24,8 +24,10 @@ public record OrganizationResponseDto(
     @Schema(description = "КПП", example = "781401001")
     String kpp,
 
-    @Schema(description = "Полное имя",
-        example = "ПУБЛИЧНОЕ АКЦИОНЕРНОЕ ОБЩЕСТВО \"ГАЗПРОМ\"")
+    @Schema(
+        description = "Полное имя",
+        example = "ПУБЛИЧНОЕ АКЦИОНЕРНОЕ ОБЩЕСТВО \"ГАЗПРОМ\""
+    )
     String longName,
 
     @Schema(description = "ОГРН", example = "1027700070518")
