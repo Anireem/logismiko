@@ -23,7 +23,7 @@ class OrganizationRepositoryTest {
     }
 
     @Test
-    void SaveOrganizationEntity_ReturnSavedOrganizationEntity() {
+    void SaveOrganizationEntity_ReturnSameSavedOrganizationEntity() {
         final OrganizationEntity organizationEntity =
             OrganizationEntityBuilder
                 .anOrganizationEntity()
@@ -46,6 +46,18 @@ class OrganizationRepositoryTest {
 
         Assertions.assertThat(savedOrganizationEntity).isNotNull();
         Assertions.assertThat(savedOrganizationEntity.getId()).isPositive();
+        Assertions.assertThat(savedOrganizationEntity.getComment()).isEqualTo("Неплохой клиент");
+        Assertions.assertThat(savedOrganizationEntity.getContactName()).isEqualTo("Миллер Алексей");
+        Assertions.assertThat(savedOrganizationEntity.getEmail()).isEqualTo("mail@gazprom.ru");
+        Assertions.assertThat(savedOrganizationEntity.getInn()).isEqualTo("7736050003");
+        Assertions.assertThat(savedOrganizationEntity.getKpp()).isEqualTo("781401001");
+        Assertions.assertThat(savedOrganizationEntity.getLongName()).isEqualTo("ПУБЛИЧНОЕ АКЦИОНЕРНОЕ ОБЩЕСТВО \"ГАЗПРОМ\"");
+        Assertions.assertThat(savedOrganizationEntity.getOgrn()).isEqualTo("1027700070518");
+        Assertions.assertThat(savedOrganizationEntity.getOkpo()).isEqualTo("00040778");
+        Assertions.assertThat(savedOrganizationEntity.getOkved()).isEqualTo("46.71");
+        Assertions.assertThat(savedOrganizationEntity.getPhone()).isEqualTo("8-495-464-41-12");
+        Assertions.assertThat(savedOrganizationEntity.getShortName()).isEqualTo("ПАО \"Газпром\"");
+        Assertions.assertThat(savedOrganizationEntity.getView()).isEqualTo("Газпром");
     }
 
     @Test
