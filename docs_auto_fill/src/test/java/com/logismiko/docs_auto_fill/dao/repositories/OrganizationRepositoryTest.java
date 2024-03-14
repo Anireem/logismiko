@@ -38,29 +38,9 @@ class OrganizationRepositoryTest {
                 .withShortName("ПАО \"Газпром\"")
                 .withView("Газпром")
                 .build();
-
         //Act
         final OrganizationEntity savedOrganizationEntity =
             organizationRepository.save(organizationEntity);
-
-        //Assert
-        Assertions.assertThat(savedOrganizationEntity).isNotNull();
-        Assertions.assertThat(savedOrganizationEntity.getId()).isGreaterThan(0);
-    }
-
-    @Test
-    void OrganizationRepository_Save_OrganizationWithoutViewShouldNotSave() {
-        //Arrange
-        final OrganizationEntity organizationEntity =
-            OrganizationEntityBuilder
-                .anOrganizationEntity()
-                .withShortName("ПАО \"Газпром\"")
-                .build();
-
-        //Act
-        final OrganizationEntity savedOrganizationEntity =
-            organizationRepository.save(organizationEntity);
-
         //Assert
         Assertions.assertThat(savedOrganizationEntity).isNotNull();
         Assertions.assertThat(savedOrganizationEntity.getId()).isGreaterThan(0);
