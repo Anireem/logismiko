@@ -10,15 +10,15 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * Служит для перехвата и обработки ошибок в контроллерах, для этого
- * контроллер должен реализовать данный интерфейс.
+ * Serves to intercept and handle errors in controllers,
+ * the controller must implement this interface.
  */
 public interface ControllerExceptionHandler {
     /**
-     * Перехватывает ошибки валидации входящих ДТО и выводим их описание из ДТО.
-     * @param argumentNotValidException Ошибка валидации.
-     * @return HashMap, где ключ - имя параметра не прошедшего валидацию, а
-     * значение - сообщение описывающее ошибку валидации.
+     * Intercepts validation errors of incoming DTOs and displays their descriptions.
+     * @param argumentNotValidException Validation error.
+     * @return HashMap: the key is name of  parameter that has not passed
+     * and the value is a message describing the validation error.
      */
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ExceptionHandler(MethodArgumentNotValidException.class)

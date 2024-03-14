@@ -17,7 +17,7 @@ import java.net.URI;
 import static com.logismiko.docs_auto_fill.api.constants.ApiRoutes.Organization.ORGANIZATION_CONTEXT_PATH;
 
 /**
- * Контроллер содержит методы для работы с организациями.
+ * Represents methods for working with organizations.
  */
 @RestController
 @RequestMapping(ORGANIZATION_CONTEXT_PATH)
@@ -25,13 +25,13 @@ public class OrganizationController
     implements OrganizationEndpoint, ControllerExceptionHandler {
 
     /**
-     * Слой сервиса для работы с организациями.
+     * Service layer for working with organizations.
      */
     private final OrganizationService organizationService;
 
     /**
-     * Конструктор, параметры заполняются с помощью Dependency Injection.
-     * @param organizationService Слой сервиса для работы с организациями.
+     * Constructor, parameters are filled using Dependency Injection.
+     * @param organizationService Service layer for working with organizations.
      */
     @Autowired
     public OrganizationController(
@@ -41,11 +41,11 @@ public class OrganizationController
     }
 
     /**
-     * Добавить организацию в базу данных.
-     * @param organizationRequestDto DTO для создания организации.
-     * @param ucb Служебный параметр, заполняется автоматически.
-     * @return ResponseEntity с кодом 200 (со ссылкой на новый элемент),
-     * либо с кодом 400
+     * Adds organization to the database.
+     * @param organizationRequestDto DTO for creating an organization.
+     * @param ucb Service parameter, filled in automatically.
+     * @return ResponseEntity with code 200 (with a link to a new element),
+     * or with code 400.
      */
     @PostMapping
     @Override
@@ -65,9 +65,9 @@ public class OrganizationController
     }
 
     /**
-     * Получить организацию по ID.
-     * @param id ID организации.
-     * @return ResponseEntity с кодом 200 и телом содержащим DTO организации.
+     * Get organization by ID.
+     * @param id Organization ID.
+     * @return ResponseEntity with code 200 and body containing the organization's DTO.
      */
     @GetMapping("/{id}")
     @Override
@@ -79,8 +79,8 @@ public class OrganizationController
     }
 
     /**
-     * Получить список всех организаций, без пагинации.
-     * @return Response entity with list of all Organizations in the body.
+     * Get list of organizations, without pagination.
+     * @return Response entity with list of organizations in the body.
      */
     @GetMapping
     public
@@ -89,9 +89,9 @@ public class OrganizationController
     }
 
     /**
-     * Удалить организацию по ID из базы.
-     * @param id ID организации.
-     * @return Только ResponseEntity с кодом 204, без другого контента.
+     * Delete organization by ID from database.
+     * @param id organization ID.
+     * @return ResponseEntity with code 204, without extra content.
      */
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteOrganization(

@@ -1,14 +1,14 @@
 package com.logismiko.docs_auto_fill.api.constants;
 
 /**
- * Предоставляет роуты для всех API
+ * Represents routes for all API
  */
 public final class ApiRoutes {
     private ApiRoutes() {
     }
 
     /**
-     * Предоставляет роуты для API по управлению организациями.
+     * Represents routes for organization management APIs.
      */
     public final class Organization {
         private Organization() {

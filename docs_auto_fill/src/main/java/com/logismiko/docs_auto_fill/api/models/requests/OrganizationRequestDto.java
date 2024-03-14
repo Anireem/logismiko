@@ -8,7 +8,7 @@ import jakarta.validation.constraints.NotNull;
 import static io.swagger.v3.oas.annotations.media.Schema.RequiredMode.REQUIRED;
 
 /**
- * DTO для запроса, содержит данные OrganizationEntity.
+ * DTO for request, consists OrganizationEntity data.
  */
 public record OrganizationRequestDto(
     @Schema(description = "Комментарий", example = "Не приоритетный клиент")
