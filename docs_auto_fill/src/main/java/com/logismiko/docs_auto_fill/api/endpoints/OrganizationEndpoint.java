@@ -22,7 +22,7 @@ public interface OrganizationEndpoint {
     /**
      * [POST] /api/organizations
      */
-    @Operation(summary = "Добавляет организацию в базу данных")
+    @Operation(summary = "Добавляет организацию в базу данных.")
     @ApiResponse(
         responseCode = "201",
         description = "Success - организация успешно добавлена в базу."

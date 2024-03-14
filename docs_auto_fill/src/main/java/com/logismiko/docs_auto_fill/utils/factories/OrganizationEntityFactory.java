@@ -14,7 +14,6 @@ public final class OrganizationEntityFactory {
                 .withComment(organizationRequestDto.comment())
                 .withContactName(organizationRequestDto.contactName())
                 .withEmail(organizationRequestDto.email())
-                .withId(organizationRequestDto.id())
                 .withInn(organizationRequestDto.inn())
                 .withKpp(organizationRequestDto.kpp())
                 .withLongName(organizationRequestDto.longName())

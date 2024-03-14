@@ -8,9 +8,9 @@ public final class OrganizationResponseDtoBuilder {
     private String email;
     private Long id;
     private String inn;
-    private Integer kpp;
+    private String kpp;
     private String longName;
-    private Integer ogrn;
+    private String ogrn;
     private String okpo;
     private String okved;
     private String phone;
@@ -49,7 +49,7 @@ public final class OrganizationResponseDtoBuilder {
         return this;
     }
 
-    public OrganizationResponseDtoBuilder withKpp(Integer kpp) {
+    public OrganizationResponseDtoBuilder withKpp(String kpp) {
         this.kpp = kpp;
         return this;
     }
@@ -59,7 +59,7 @@ public final class OrganizationResponseDtoBuilder {
         return this;
     }
 
-    public OrganizationResponseDtoBuilder withOgrn(Integer ogrn) {
+    public OrganizationResponseDtoBuilder withOgrn(String ogrn) {
         this.ogrn = ogrn;
         return this;
     }

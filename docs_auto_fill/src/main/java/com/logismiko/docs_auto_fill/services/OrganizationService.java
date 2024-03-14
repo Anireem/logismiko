@@ -16,13 +16,12 @@ import static org.springframework.http.HttpStatus.NOT_FOUND;
 
 /**
  * Represents a service to work with Organizations.
- * @param organizationRepository Repository for storing
- * and retrieving data by organization
  */
 @Service
-public record OrganizationService(
-        @Autowired OrganizationRepository organizationRepository
-) {
+public class OrganizationService {
+
+    @Autowired
+    OrganizationRepository organizationRepository;
 
     /**
      * Creates Organization.

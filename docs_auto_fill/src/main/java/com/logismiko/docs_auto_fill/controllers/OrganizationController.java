@@ -21,14 +21,13 @@ import static com.logismiko.docs_auto_fill.api.constants.ApiRoutes.Organization.
 
 /**
  * Contains methods to work with Organizations.
- * @param organizationService Service layer for working with organizations.
  */
 
 @RestController
 @RequestMapping(ORGANIZATION_CONTEXT_PATH)
-public record OrganizationController(
-        @Autowired OrganizationService organizationService
-) implements OrganizationEndpoint {
+public class OrganizationController implements OrganizationEndpoint {
+
+    @Autowired OrganizationService organizationService;
 
     /**
      * Adds Organization to database.

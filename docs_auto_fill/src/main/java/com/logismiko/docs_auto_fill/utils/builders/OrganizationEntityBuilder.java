@@ -8,10 +8,10 @@ public final class OrganizationEntityBuilder {
     private String shortName;
     private String longName;
     private String inn;
-    private Integer kpp;
+    private String kpp;
     private String okved;
     private String okpo;
-    private Integer ogrn;
+    private String ogrn;
     private String email;
     private String phone;
     private String comment;
@@ -49,7 +49,7 @@ public final class OrganizationEntityBuilder {
         return this;
     }
 
-    public OrganizationEntityBuilder withKpp(Integer kpp) {
+    public OrganizationEntityBuilder withKpp(String kpp) {
         this.kpp = kpp;
         return this;
     }
@@ -64,7 +64,7 @@ public final class OrganizationEntityBuilder {
         return this;
     }
 
-    public OrganizationEntityBuilder withOgrn(Integer ogrn) {
+    public OrganizationEntityBuilder withOgrn(String ogrn) {
         this.ogrn = ogrn;
         return this;
     }
