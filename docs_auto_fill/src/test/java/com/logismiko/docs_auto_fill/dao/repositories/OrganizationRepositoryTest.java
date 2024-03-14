@@ -10,6 +10,7 @@ import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabas
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 
 import java.util.List;
+import java.util.Optional;
 
 @DataJpaTest
 @AutoConfigureTestDatabase(connection = EmbeddedDatabaseConnection.H2)
@@ -22,11 +23,11 @@ class OrganizationRepositoryTest {
     }
 
     @Test
-    void OrganizationRepository_Save_ReturnSavedOrganization() {
+    void SaveOrganizationEntity_ReturnSavedOrganizationEntity() {
         final OrganizationEntity organizationEntity =
             OrganizationEntityBuilder
                 .anOrganizationEntity()
-                .withComment("Не приоритетный клиент")
+                .withComment("Неплохой клиент")
                 .withContactName("Миллер Алексей")
                 .withEmail("mail@gazprom.ru")
                 .withInn("7736050003")
@@ -48,7 +49,7 @@ class OrganizationRepositoryTest {
     }
 
     @Test
-    void OrganizationRepository_GetALL_ReturnMoreThenOneOrganization() {
+    void GetAllOrganizationEntity_ReturnMoreThenOneOrganizationEntity() {
         final OrganizationEntity google = OrganizationEntityBuilder.anOrganizationEntity()
             .withView("Google")
             .build();
@@ -66,17 +67,47 @@ class OrganizationRepositoryTest {
     }
 
     @Test
-    void OrganizationRepository_FindById_ReturnOrganization() {
-        final OrganizationEntity organizationEntity =
+    void FindByIdOrganizationEntity_ReturnOrganizationEntity() {
+        final OrganizationEntity microsoft =
             OrganizationEntityBuilder.anOrganizationEntity()
             .withView("Microsoft")
             .build();
 
-        OrganizationEntity savedOrganizationEntity =
-            organizationRepository.save(organizationEntity);
-        OrganizationEntity organizationEntityFromDatabase =
-            organizationRepository.findById(savedOrganizationEntity.getId()).get();
+        final OrganizationEntity microsoftSaved =
+            organizationRepository.save(microsoft);
+        final OrganizationEntity microsoftFromDatabase =
+            organizationRepository.findById(microsoftSaved.getId()).get();
 
-        Assertions.assertThat(organizationEntityFromDatabase).isNotNull();
+        Assertions.assertThat(microsoftFromDatabase).isNotNull();
+    }
+
+    @Test
+    void UpdateOrganizationEntity_ReturnOrganizationEntityNotNull() {
+        final OrganizationEntity amazon =
+            OrganizationEntityBuilder.anOrganizationEntity()
+                .withView("Amazon")
+                .withEmail("mail@amazon.ru")
+                .build();
+
+        final OrganizationEntity amazonSaved = organizationRepository.save(amazon);
+        amazonSaved.setEmail("amazon@bk.ru");
+        final OrganizationEntity amazonUpdated = organizationRepository.save(amazonSaved);
+
+        Assertions.assertThat(amazonUpdated.getEmail()).isNotNull();
+        Assertions.assertThat(amazonUpdated.getEmail()).isEqualTo("amazon@bk.ru");
+    }
+
+    @Test
+    void DeleteOrganizationEntity_ReturnOrganizationEntityIsEmpty() {
+        final OrganizationEntity intel =
+            OrganizationEntityBuilder.anOrganizationEntity()
+                .withView("Intel")
+                .build();
+
+        final OrganizationEntity intelSaved = organizationRepository.save(intel);
+        organizationRepository.deleteById(intelSaved.getId());
+        Optional<OrganizationEntity> intelReturn = organizationRepository.findById(intelSaved.getId());
+
+        Assertions.assertThat(intelReturn).isEmpty();
     }
 }
