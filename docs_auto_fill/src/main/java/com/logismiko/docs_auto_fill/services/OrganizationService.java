@@ -9,7 +9,6 @@ import com.logismiko.docs_auto_fill.utils.factories.OrganizationResponseDtoFacto
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.mapping.PropertyReferenceException;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
@@ -76,24 +75,13 @@ public class OrganizationService {
      * @return list of organization response DTOs.
      */
     public List<OrganizationResponseDto> getOrganizations(
-        Pageable pageable
+        final Pageable pageable
     ) {
-        try {
-            Page<OrganizationEntity> page =
-                organizationRepository.findAll(pageable);
-
-            return page.getContent()
-                .stream()
-                .map(OrganizationResponseDtoFactory::
-                    makeOrganizationResponseDto)
-                .toList();
-
-        } catch (PropertyReferenceException e) {
-            throw new ResponseStatusException(
-                BAD_REQUEST,
-                "Wrong request format"
-            );
-        }
+        return retrieveOrganizations(pageable)
+            .getContent()
+            .stream()
+            .map(OrganizationResponseDtoFactory::makeOrganizationResponseDto)
+            .toList();
     }
 
     /**
@@ -108,6 +96,17 @@ public class OrganizationService {
                 NOT_FOUND,
                 String.format("Entity: %s not found", 1L)
             );
+        }
+    }
+
+    private Page<OrganizationEntity> retrieveOrganizations(
+        final Pageable pageable
+    ) {
+        try {
+            return organizationRepository.findAll(pageable);
+        } catch (Exception e) {
+            throw new ResponseStatusException(BAD_REQUEST,
+                "Error retrieving organizations", e);
         }
     }
 }
