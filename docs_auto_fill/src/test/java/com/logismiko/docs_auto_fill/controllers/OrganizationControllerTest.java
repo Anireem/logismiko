@@ -11,12 +11,15 @@ import com.logismiko.docs_auto_fill.utils.factories.OrganizationResponseDtoFacto
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.ResultActions;
@@ -40,6 +43,9 @@ class OrganizationControllerTest {
 
     @MockBean
     private OrganizationService organizationService;
+
+    @Mock
+    private Pageable pageable;
 
     @Autowired
     private ObjectMapper objectMapper;
@@ -99,7 +105,7 @@ class OrganizationControllerTest {
     @Test
     void getOrganizationById() throws Exception {
         Long organizationId = 1L;
-        when(organizationService.getOrganization(organizationId)).thenReturn(organizationResponseDto1);
+        when(organizationService.getOrganizationById(organizationId)).thenReturn(organizationResponseDto1);
 
         ResultActions response = mockMvc.perform(get("/api/organizations/1")
             .contentType(MediaType.APPLICATION_JSON)
@@ -113,12 +119,14 @@ class OrganizationControllerTest {
 
     @Test
     void getAllOrganizations() throws Exception {
-        when(organizationService.getAllOrganizations()).thenReturn(organizationResponseDtoList);
+        PageRequest pageable = PageRequest.of(0, 20);
+        when(organizationService.getOrganizations(pageable)).thenReturn(organizationResponseDtoList);
         ResultActions response = mockMvc.perform(get("/api/organizations")
             .contentType(MediaType.APPLICATION_JSON)
         );
 
         response.andExpect(MockMvcResultMatchers.status().isOk())
+            .andDo(MockMvcResultHandlers.print())
             .andExpect(MockMvcResultMatchers.jsonPath("$.[0].email").value("gazprom@mail.ru"))
             .andExpect(MockMvcResultMatchers.jsonPath("$.[1].email").value("mail@gazprom.ru"));
     }

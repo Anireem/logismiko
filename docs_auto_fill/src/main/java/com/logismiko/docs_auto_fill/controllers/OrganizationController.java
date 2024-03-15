@@ -6,9 +6,10 @@ import com.logismiko.docs_auto_fill.api.models.responses.OrganizationResponseDto
 import com.logismiko.docs_auto_fill.errors.handlers.ControllerExceptionHandler;
 import com.logismiko.docs_auto_fill.services.OrganizationService;
 import jakarta.validation.Valid;
+import org.springdoc.core.annotations.ParameterObject;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
-
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
 
@@ -43,7 +44,7 @@ public class OrganizationController
     /**
      * Adds organization to the database.
      * @param organizationRequestDto DTO for creating an organization.
-     * @param ucb Service parameter, filled in automatically.
+     * @param ucb Service parameter, filled in automatically,
      * @return ResponseEntity with code 200 (with a link to a new element),
      * or with code 400.
      */
@@ -67,7 +68,8 @@ public class OrganizationController
     /**
      * Get organization by ID.
      * @param id Organization ID.
-     * @return ResponseEntity with code 200 and body containing the organization's DTO.
+     * @return ResponseEntity with code 200 and body containing
+     * the organization's DTO.
      */
     @GetMapping("/{id}")
     @Override
@@ -75,17 +77,22 @@ public class OrganizationController
         @PathVariable(value = "id")
         final Long id
     ) {
-        return ResponseEntity.ok(organizationService.getOrganization(id));
+        return ResponseEntity.ok(organizationService.getOrganizationById(id));
     }
 
     /**
-     * Get list of organizations, without pagination.
-     * @return Response entity with list of organizations in the body.
+     * Returns page of organizations as list of organization response DTOs.
+     * @param pageable consists page number (0-default), size (20-default
+     *                 and sort type (no sort - default).
+     * @return list of organization response DTOs.
      */
     @GetMapping
-    public
-    ResponseEntity<Iterable<OrganizationResponseDto>> getAllOrganizations() {
-        return ResponseEntity.ok(organizationService.getAllOrganizations());
+    @Override
+    public ResponseEntity<Iterable<OrganizationResponseDto>>
+    getOrganizations(@ParameterObject Pageable pageable) {
+        return ResponseEntity.ok(
+            organizationService.getOrganizations(pageable)
+        );
     }
 
     /**

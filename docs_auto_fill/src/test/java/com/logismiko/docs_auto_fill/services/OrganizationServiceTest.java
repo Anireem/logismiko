@@ -7,6 +7,7 @@ import com.logismiko.docs_auto_fill.dao.repositories.OrganizationRepository;
 import com.logismiko.docs_auto_fill.utils.builders.OrganizationEntityBuilder;
 import com.logismiko.docs_auto_fill.utils.builders.OrganizationRequestDtoBuilder;
 import com.logismiko.docs_auto_fill.utils.factories.OrganizationEntityFactory;
+import com.logismiko.docs_auto_fill.utils.factories.OrganizationResponseDtoFactory;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -14,11 +15,12 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 
 import java.util.List;
 import java.util.Optional;
 
-import static org.awaitility.Awaitility.given;
 import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.mockito.Mockito.when;
 
@@ -66,17 +68,25 @@ class OrganizationServiceTest {
         organizationEntity.setId(1L);
         when(organizationRepository.findById(1L)).thenReturn(Optional.ofNullable(organizationEntity));
 
-        OrganizationResponseDto savedOrganization = organizationService.getOrganization(1L);
+        OrganizationResponseDto savedOrganization = organizationService.getOrganizationById(1L);
 
         Assertions.assertThat(savedOrganization).isNotNull();
     }
 
     @Test
-    void getAllOrganizations() {
-        List<OrganizationEntity> organizationEntities = Mockito.mock(List.class);
-        when(organizationRepository.findAll()).thenReturn(organizationEntities);
+    void getOrganizations() {
+        List<OrganizationResponseDto> organizationResponseDtos = Mockito.mock(List.class);
+        Page<OrganizationEntity> page = Mockito.mock(Page.class);
+        PageRequest pageable = PageRequest.of(0, 20);
+        when(organizationRepository.findAll(pageable)).thenReturn(page);
+        when(
+            page.getContent()
+            .stream()
+            .map(OrganizationResponseDtoFactory::makeOrganizationResponseDto)
+            .toList()
+        ).thenReturn(organizationResponseDtos);
 
-        List<OrganizationResponseDto> allOrganizations = organizationService.getAllOrganizations();
+        List<OrganizationResponseDto> allOrganizations = organizationService.getOrganizations(pageable);
 
         Assertions.assertThat(allOrganizations).isNotNull();
     }
