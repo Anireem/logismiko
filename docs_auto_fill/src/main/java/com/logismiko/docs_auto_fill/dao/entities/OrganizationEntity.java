@@ -28,7 +28,8 @@ public class OrganizationEntity {
     private String shortName;
     private String view;
 
-    //<editor-fold desc="Getters and Setters">
+    //region Getters and Setters
+
     /**
      * Gets comment.
      *
@@ -262,5 +263,6 @@ public class OrganizationEntity {
     public void setView(String view) {
         this.view = view;
     }
-    //</editor-fold>
+
+    //endregion
 }

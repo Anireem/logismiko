@@ -99,6 +99,13 @@ public class OrganizationService {
         }
     }
 
+    //region Private methods
+
+    /**
+     * Private method, retrieves page of organizations.
+     * @param pageable Consists page number, size and sort type.
+     * @return Page of organizations.
+     */
     private Page<OrganizationEntity> retrieveOrganizations(
         final Pageable pageable
     ) {
@@ -109,4 +116,6 @@ public class OrganizationService {
                 "Error retrieving organizations", e);
         }
     }
+
+    //endregion
 }
