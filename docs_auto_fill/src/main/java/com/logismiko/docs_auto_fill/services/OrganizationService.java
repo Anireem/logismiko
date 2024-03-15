@@ -42,8 +42,8 @@ public class OrganizationService {
 
     /**
      * Adds organization to database.
-     * @param organizationRequestDto DTO для создания организации.
-     * @return DTO вновь созданной организации.
+     * @param organizationRequestDto DTO for organization creation.
+     * @return DTO of a newly created organization.
      */
     public OrganizationResponseDto addOrganization(
         final OrganizationRequestDto organizationRequestDto
@@ -56,9 +56,9 @@ public class OrganizationService {
     }
 
     /**
-     * Извлекает организацию из базы данных по ID.
-     * @param id ID организации.
-     * @return DTO найденной организации.
+     * Retrieves organization from database by id.
+     * @param id Organization ID.
+     * @return Found organization DTO.
      */
     public OrganizationResponseDto getOrganizationById(final Long id) {
         return OrganizationResponseDtoFactory.makeOrganizationResponseDto(
