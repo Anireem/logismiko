@@ -64,18 +64,8 @@ public interface OrganizationEndpoint {
         responseCode = "200",
         description = "Success - organizations successfully received."
     )
-    ResponseEntity<Iterable<OrganizationResponseDto>> getAllOrganizations();
-
-    /**
-     * [GET] /api/organizations
-     */
-    @Operation(summary = "Returns page with organizations.")
-    @ApiResponse(
-        responseCode = "200",
-        description = "Success - organizations successfully received."
-    )
     ResponseEntity<Iterable<OrganizationResponseDto>>
-    getOrganizationsAsPage(Pageable pageable);
+    getOrganizations(Pageable pageable);
 
     /**
      * [DELETE] /api/organizations/{id}

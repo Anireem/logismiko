@@ -8,14 +8,14 @@ import com.logismiko.docs_auto_fill.utils.factories.OrganizationEntityFactory;
 import com.logismiko.docs_auto_fill.utils.factories.OrganizationResponseDtoFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
+import org.springframework.data.mapping.PropertyReferenceException;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 
+import static org.springframework.http.HttpStatus.BAD_REQUEST;
 import static org.springframework.http.HttpStatus.NOT_FOUND;
 
 /**
@@ -71,37 +71,29 @@ public class OrganizationService {
     }
 
     /**
-     * Retrieves all organizations from database.
-     * @return list of organization DTOs.
-     */
-    public List<OrganizationResponseDto> getAllOrganizations() {
-        return organizationRepository.findAll()
-            .stream()
-            .map(
-                OrganizationResponseDtoFactory::makeOrganizationResponseDto
-            )
-            .toList();
-    }
-
-    /**
      * Returns page of organizations as list of organization response DTOs.
      * @param pageable consists page number, size and sort type.
      * @return list of organization response DTOs.
      */
-    public List<OrganizationResponseDto> getOrganizationsAsPage(
+    public List<OrganizationResponseDto> getOrganizations(
         Pageable pageable
     ) {
-        PageRequest pageRequest = PageRequest.of(
-            pageable.getPageNumber(),
-            pageable.getPageSize(),
-            pageable.getSortOr(Sort.by(Sort.Direction.DESC, "id"))
-        );
-        Page<OrganizationEntity> page =
-            organizationRepository.findAll(pageRequest);
-        return page.getContent()
-            .stream()
-            .map(OrganizationResponseDtoFactory::makeOrganizationResponseDto)
-            .toList();
+        try {
+            Page<OrganizationEntity> page =
+                organizationRepository.findAll(pageable);
+
+            return page.getContent()
+                .stream()
+                .map(OrganizationResponseDtoFactory::
+                    makeOrganizationResponseDto)
+                .toList();
+
+        } catch (PropertyReferenceException e) {
+            throw new ResponseStatusException(
+                BAD_REQUEST,
+                "Wrong request format"
+            );
+        }
     }
 
     /**

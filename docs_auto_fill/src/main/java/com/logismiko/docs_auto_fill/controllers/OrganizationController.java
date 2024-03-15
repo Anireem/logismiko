@@ -81,28 +81,17 @@ public class OrganizationController
     }
 
     /**
-     * Get list of organizations, without pagination.
-     * @return Response entity with list of organizations in the body.
+     * Returns page of organizations as list of organization response DTOs.
+     * @param pageable consists page number (0-default), size (20-default
+     *                 and sort type (no sort - default).
+     * @return list of organization response DTOs.
      */
     @GetMapping
     @Override
     public ResponseEntity<Iterable<OrganizationResponseDto>>
-    getAllOrganizations() {
-        return ResponseEntity.ok(organizationService.getAllOrganizations());
-    }
-
-    /**
-     * Returns page of organizations as list of organization response DTOs.
-     * @param pageable consists page number, size and sort type,
-     *                 service parameter, filled in automatically.
-     * @return list of organization response DTOs.
-     */
-    @GetMapping("/page")
-    @Override
-    public ResponseEntity<Iterable<OrganizationResponseDto>>
-    getOrganizationsAsPage(@ParameterObject Pageable pageable) {
+    getOrganizations(@ParameterObject Pageable pageable) {
         return ResponseEntity.ok(
-            organizationService.getOrganizationsAsPage(pageable)
+            organizationService.getOrganizations(pageable)
         );
     }
 
