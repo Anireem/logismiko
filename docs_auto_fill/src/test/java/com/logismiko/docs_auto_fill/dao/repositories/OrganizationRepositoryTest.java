@@ -25,8 +25,7 @@ class OrganizationRepositoryTest {
     @Test
     void SaveOrganizationEntity_ReturnSameSavedOrganizationEntity() {
         final OrganizationEntity organizationEntity =
-            OrganizationEntityBuilder
-                .anOrganizationEntity()
+            OrganizationEntityBuilder.anOrganizationEntity()
                 .withComment("Неплохой клиент")
                 .withContactName("Миллер Алексей")
                 .withEmail("mail@gazprom.ru")
@@ -38,8 +37,7 @@ class OrganizationRepositoryTest {
                 .withOkved("46.71")
                 .withPhone("8-495-464-41-12")
                 .withShortName("ПАО \"Газпром\"")
-                .withView("Газпром")
-                .build();
+                .withView("Газпром").build();
 
         final OrganizationEntity savedOrganizationEntity =
             organizationRepository.save(organizationEntity);

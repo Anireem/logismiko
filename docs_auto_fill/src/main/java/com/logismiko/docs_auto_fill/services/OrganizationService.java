@@ -6,8 +6,6 @@ import com.logismiko.docs_auto_fill.dao.entities.OrganizationEntity;
 import com.logismiko.docs_auto_fill.dao.repositories.OrganizationRepository;
 import com.logismiko.docs_auto_fill.utils.factories.OrganizationEntityFactory;
 import com.logismiko.docs_auto_fill.utils.factories.OrganizationResponseDtoFactory;
-import jakarta.validation.Valid;
-import jakarta.validation.Validator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
@@ -17,7 +15,7 @@ import java.util.List;
 import static org.springframework.http.HttpStatus.NOT_FOUND;
 
 /**
- * Представляет сервисный слой для работы с организациями.
+ * Represents service layer for working with organizations.
  */
 @Service
 public class OrganizationService {
@@ -32,7 +30,7 @@ public class OrganizationService {
     }
 
     /**
-     * Добавляет организацию в базу данных.
+     * Adds organization to database.
      * @param organizationRequestDto DTO для создания организации.
      * @return DTO вновь созданной организации.
      */
@@ -51,6 +49,7 @@ public class OrganizationService {
      * @param id ID организации.
      * @return DTO найденной организации.
      */
+    // TODO: 3/15/2024 add byid to name
     public OrganizationResponseDto getOrganization(final Long id) {
         return OrganizationResponseDtoFactory.makeOrganizationResponseDto(
             organizationRepository.findById(id).orElseThrow(
@@ -75,8 +74,8 @@ public class OrganizationService {
     }
 
     /**
-     * Удяляет организацию из базы, если она существует.
-     * @param id ID подлежащей удалению организации.
+     * Remove organization from database if it exists.
+     * @param id ID of the organization to be deleted.
      */
     public void deleteOrganization(final Long id) {
         if (organizationRepository.existsById(id)) {
