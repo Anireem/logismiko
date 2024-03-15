@@ -18,7 +18,6 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import java.util.List;
 import java.util.Optional;
 
-import static org.awaitility.Awaitility.given;
 import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.mockito.Mockito.when;
 
@@ -66,7 +65,7 @@ class OrganizationServiceTest {
         organizationEntity.setId(1L);
         when(organizationRepository.findById(1L)).thenReturn(Optional.ofNullable(organizationEntity));
 
-        OrganizationResponseDto savedOrganization = organizationService.getOrganization(1L);
+        OrganizationResponseDto savedOrganization = organizationService.getOrganizationById(1L);
 
         Assertions.assertThat(savedOrganization).isNotNull();
     }

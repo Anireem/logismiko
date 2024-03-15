@@ -7,6 +7,7 @@ import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.util.UriComponentsBuilder;
 
@@ -14,22 +15,22 @@ import org.springframework.web.util.UriComponentsBuilder;
  * Represents the endpoint for working with organizations.
  */
 @Tag(
-    name = "Endpoint для работы с организациями",
-    description = "REST API для сохранения и извлечения данных по организациям"
+    name = "Endpoint for working with organizations",
+    description = "REST API to save and retrieve organizations data."
 )
 public interface OrganizationEndpoint {
 
     /**
      * [POST] /api/organizations
      */
-    @Operation(summary = "Добавляет организацию в базу данных.")
+    @Operation(summary = "Adds an organization to database.")
     @ApiResponse(
         responseCode = "201",
-        description = "Success - организация успешно добавлена в базу."
+        description = "Success - organization successfully received."
     )
     @ApiResponse(
         responseCode = "400",
-        description = "Bad Request - неправильный формат body."
+        description = "Bad Request - incorrect body format."
     )
     ResponseEntity<Void> addOrganization(
         OrganizationRequestDto organizationRequestDto,
@@ -39,17 +40,18 @@ public interface OrganizationEndpoint {
     /**
      * [GET] /api/organizations/{id}
      */
-    @Operation(summary = "Возвращает организацию по ID.")
+    @Operation(summary = "Returns organization by ID.")
     @ApiResponse(
         responseCode = "200",
-        description = "Success - организация успешно получена.",
+        description = "Success - organization successfully received.",
         content = {@Content(
             schema = @Schema(implementation = OrganizationResponseDto.class)
         )}
     )
     @ApiResponse(
         responseCode = "403",
-        description = "Error - организации с таким ID нет в базе.",
+        description = "Error - there is no organization with this ID in the"
+            + " database.",
         content = @Content
     )
     ResponseEntity<OrganizationResponseDto> getOrganization(Long id);
@@ -57,24 +59,36 @@ public interface OrganizationEndpoint {
     /**
      * [GET] /api/organizations
      */
-    @Operation(summary = "Возвращает список всех организаций.")
+    @Operation(summary = "Returns all organizations.")
     @ApiResponse(
         responseCode = "200",
-        description = "Success - успешно получены организации."
+        description = "Success - organizations successfully received."
     )
     ResponseEntity<Iterable<OrganizationResponseDto>> getAllOrganizations();
 
     /**
+     * [GET] /api/organizations
+     */
+    @Operation(summary = "Returns page with organizations.")
+    @ApiResponse(
+        responseCode = "200",
+        description = "Success - organizations successfully received."
+    )
+    ResponseEntity<Iterable<OrganizationResponseDto>>
+    getOrganizationsAsPage(Pageable pageable);
+
+    /**
      * [DELETE] /api/organizations/{id}
      */
-    @Operation(summary = "Удаляет организацию.")
+    @Operation(summary = "Delete organization.")
     @ApiResponse(
         responseCode = "204",
-        description = "No content - организация успешно удалена."
+        description = "No content - organization successfully deleted."
     )
     @ApiResponse(
         responseCode = "404",
-        description = "Not found - организации с таким ID нет в базе."
+        description = "Not found - there is no organization with this ID"
+            + "in the database."
     )
     ResponseEntity<Void> deleteOrganization(Long id);
 }

@@ -7,6 +7,10 @@ import com.logismiko.docs_auto_fill.dao.repositories.OrganizationRepository;
 import com.logismiko.docs_auto_fill.utils.factories.OrganizationEntityFactory;
 import com.logismiko.docs_auto_fill.utils.factories.OrganizationResponseDtoFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
@@ -20,11 +24,18 @@ import static org.springframework.http.HttpStatus.NOT_FOUND;
 @Service
 public class OrganizationService {
 
-    OrganizationRepository organizationRepository;
+    /**
+     * Repository for working with organizations.
+     */
+    private OrganizationRepository organizationRepository;
 
+    /**
+     * Constructor, parameters are filled using Dependency Injection.
+     * @param organizationRepository Repository for working with organizations.
+     */
     @Autowired
     public OrganizationService(
-        OrganizationRepository organizationRepository
+        final OrganizationRepository organizationRepository
     ) {
         this.organizationRepository = organizationRepository;
     }
@@ -49,8 +60,7 @@ public class OrganizationService {
      * @param id ID организации.
      * @return DTO найденной организации.
      */
-    // TODO: 3/15/2024 add byid to name
-    public OrganizationResponseDto getOrganization(final Long id) {
+    public OrganizationResponseDto getOrganizationById(final Long id) {
         return OrganizationResponseDtoFactory.makeOrganizationResponseDto(
             organizationRepository.findById(id).orElseThrow(
                 () -> new ResponseStatusException(
@@ -61,8 +71,8 @@ public class OrganizationService {
     }
 
     /**
-     * Извлекает весь список организаций из базы данных.
-     * @return список из DTO организаций.
+     * Retrieves all organizations from database.
+     * @return list of organization DTOs.
      */
     public List<OrganizationResponseDto> getAllOrganizations() {
         return organizationRepository.findAll()
@@ -70,6 +80,27 @@ public class OrganizationService {
             .map(
                 OrganizationResponseDtoFactory::makeOrganizationResponseDto
             )
+            .toList();
+    }
+
+    /**
+     * Returns page of organizations as list of organization response DTOs.
+     * @param pageable consists page number, size and sort type.
+     * @return list of organization response DTOs.
+     */
+    public List<OrganizationResponseDto> getOrganizationsAsPage(
+        Pageable pageable
+    ) {
+        PageRequest pageRequest = PageRequest.of(
+            pageable.getPageNumber(),
+            pageable.getPageSize(),
+            pageable.getSortOr(Sort.by(Sort.Direction.DESC, "id"))
+        );
+        Page<OrganizationEntity> page =
+            organizationRepository.findAll(pageRequest);
+        return page.getContent()
+            .stream()
+            .map(OrganizationResponseDtoFactory::makeOrganizationResponseDto)
             .toList();
     }
 

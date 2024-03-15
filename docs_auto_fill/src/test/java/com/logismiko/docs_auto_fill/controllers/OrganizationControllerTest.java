@@ -99,7 +99,7 @@ class OrganizationControllerTest {
     @Test
     void getOrganizationById() throws Exception {
         Long organizationId = 1L;
-        when(organizationService.getOrganization(organizationId)).thenReturn(organizationResponseDto1);
+        when(organizationService.getOrganizationById(organizationId)).thenReturn(organizationResponseDto1);
 
         ResultActions response = mockMvc.perform(get("/api/organizations/1")
             .contentType(MediaType.APPLICATION_JSON)
