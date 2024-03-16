@@ -1,16 +1,12 @@
 package com.logismiko.docs_auto_fill.dao.entities;
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.Email;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotEmpty;
-import jakarta.validation.constraints.NotNull;
 
 /**
- * Represents Entity to store the organization in database.
+ * Represents Entity to store the firm in database.
  */
 @Entity
-public class OrganizationEntity {
+public class FirmEntity {
     private String comment;
     private String contactName;
     private String email;

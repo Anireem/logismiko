@@ -8,9 +8,9 @@ import jakarta.validation.constraints.NotNull;
 import static io.swagger.v3.oas.annotations.media.Schema.RequiredMode.REQUIRED;
 
 /**
- * DTO for request, consists OrganizationEntity data.
+ * DTO for request, consists FirmEntity data.
  */
-public record OrganizationRequestDto(
+public record FirmRequestDto(
     @Schema(description = "Комментарий", example = "Не приоритетный клиент")
     String comment,
 
@@ -27,10 +27,8 @@ public record OrganizationRequestDto(
     @Schema(description = "КПП", example = "781401001")
     String kpp,
 
-    @Schema(
-        description = "Полное имя",
-        example = "ПУБЛИЧНОЕ АКЦИОНЕРНОЕ ОБЩЕСТВО \"ГАЗПРОМ\""
-    )
+    @Schema(description = "Полное имя",
+            example = "ПУБЛИЧНОЕ АКЦИОНЕРНОЕ ОБЩЕСТВО \"ГАЗПРОМ\"")
     String longName,
 
     @Schema(description = "ОГРН", example = "1027700070518")
@@ -50,11 +48,9 @@ public record OrganizationRequestDto(
 
     @NotBlank(message = "Vue - обязательно к заполнению")
     @NotNull(message = "Vue - обязательно к заполнению")
-    @Schema(
-        description = "Представление",
-        example = "Газпром",
-        requiredMode = REQUIRED
-    )
+    @Schema(description = "Представление",
+            example = "Газпром",
+            requiredMode = REQUIRED)
     String view
 ) {
 }
