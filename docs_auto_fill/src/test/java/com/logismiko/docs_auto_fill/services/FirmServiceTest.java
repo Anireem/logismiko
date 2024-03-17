@@ -1,5 +1,6 @@
 package com.logismiko.docs_auto_fill.services;
 
+import com.logismiko.docs_auto_fill.api.models.requests.FirmDataRequestDto;
 import com.logismiko.docs_auto_fill.api.models.requests.FirmRequestDto;
 import com.logismiko.docs_auto_fill.api.models.responses.FirmResponseDto;
 import com.logismiko.docs_auto_fill.dao.entities.FirmEntity;
@@ -18,6 +19,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Optional;
 
@@ -47,7 +49,8 @@ class FirmServiceTest {
             .withOkved("46.71")
             .withPhone("8-495-464-41-12")
             .withShortName("ПАО \"Газпром\"")
-            .withView("Газпром").build();
+            .withView("Газпром")
+            .withFirmDataRequestDtoSet(new LinkedHashSet<FirmDataRequestDto>()).build();
         final FirmEntity firmEntity = FirmEntityFactory.create(firmRequestDto);
         firmEntity.setId(1L);
         when(firmRepository.save(Mockito.any(FirmEntity.class))).thenReturn(firmEntity);

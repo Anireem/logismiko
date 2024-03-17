@@ -55,6 +55,7 @@ public record FirmRequestDto(
             requiredMode = REQUIRED)
     String view,
 
+    @Schema(description = "Список дополнительных данных")
     Set<FirmDataRequestDto> firmDataRequestDtoSet
 ) {
 }

@@ -48,6 +48,7 @@ public record FirmResponseDto(
     @Schema(description = "Представление", example = "Газпром")
     String view,
 
+    @Schema(description = "Список дополнительных данных")
     Set<FirmDataResponseDto> firmDataResponseDtoSet
 ) {
 }
