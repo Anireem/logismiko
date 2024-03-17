@@ -21,7 +21,7 @@ public final class FirmEntityFactory {
      * @return the firm entity
      */
     public static FirmEntity create(FirmRequestDto firmRequestDto) {
-        return FirmEntityBuilder.anFirmEntity()
+        FirmEntity firmEntity = FirmEntityBuilder.anFirmEntity()
             .withComment(firmRequestDto.comment())
             .withContactName(firmRequestDto.contactName())
             .withEmail(firmRequestDto.email())
@@ -40,5 +40,8 @@ public final class FirmEntityFactory {
                 .map(FirmDataEntityFactory::create)
                 .collect(Collectors.toSet()))
             .build();
+        firmEntity.getFirmDataEntities()
+            .forEach(firmDataEntity -> firmDataEntity.setFirmEntity(firmEntity));
+        return firmEntity;
     }
 }

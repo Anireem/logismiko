@@ -47,9 +47,6 @@ public class FirmService {
      */
     public FirmResponseDto addFirm(final FirmRequestDto firmRequestDto) {
         FirmEntity firmEntity = FirmEntityFactory.create(firmRequestDto);
-        firmEntity
-            .getFirmDataEntities()
-            .forEach(firmDataEntity -> firmDataEntity.setFirmEntity(firmEntity));
         return FirmResponseDtoFactory.create(firmRepository.save(firmEntity));
     }
 
