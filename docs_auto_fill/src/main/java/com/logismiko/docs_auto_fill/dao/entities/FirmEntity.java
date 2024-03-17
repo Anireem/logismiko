@@ -2,6 +2,9 @@ package com.logismiko.docs_auto_fill.dao.entities;
 
 import jakarta.persistence.*;
 
+import java.util.LinkedHashSet;
+import java.util.Set;
+
 /**
  * Represents Entity to store the firm in database.
  */
@@ -23,6 +26,17 @@ public class FirmEntity {
     private String phone;
     private String shortName;
     private String view;
+
+    @OneToMany(mappedBy = "firmEntity", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Set<FirmDataEntity> firmDataEntities = new LinkedHashSet<>();
+
+    public Set<FirmDataEntity> getFirmDataEntities() {
+        return firmDataEntities;
+    }
+
+    public void setFirmDataEntities(Set<FirmDataEntity> firmDataEntities) {
+        this.firmDataEntities = firmDataEntities;
+    }
 
     //region Getters and Setters
 
