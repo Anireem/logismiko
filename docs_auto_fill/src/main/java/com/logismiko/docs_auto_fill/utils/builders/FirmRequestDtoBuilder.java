@@ -1,10 +1,13 @@
 package com.logismiko.docs_auto_fill.utils.builders;
 
+import com.logismiko.docs_auto_fill.api.models.requests.FirmDataRequestDto;
 import com.logismiko.docs_auto_fill.api.models.requests.FirmRequestDto;
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
+
+import java.util.Set;
 
 import static io.swagger.v3.oas.annotations.media.Schema.RequiredMode.REQUIRED;
 
@@ -30,6 +33,7 @@ public final class FirmRequestDtoBuilder {
         example = "Газпром",
         requiredMode = REQUIRED
     ) String view;
+    private Set<FirmDataRequestDto> firmDataRequestDtoSet;
 
     private FirmRequestDtoBuilder() {
     }
@@ -98,7 +102,12 @@ public final class FirmRequestDtoBuilder {
         return this;
     }
 
+    public FirmRequestDtoBuilder withFirmDataRequestDtoSet(Set<FirmDataRequestDto> firmDataRequestDtoSet) {
+        this.firmDataRequestDtoSet = firmDataRequestDtoSet;
+        return this;
+    }
+
     public FirmRequestDto build() {
-        return new FirmRequestDto(comment, contactName, email, inn, kpp, longName, ogrn, okpo, okved, phone, shortName, view);
+        return new FirmRequestDto(comment, contactName, email, inn, kpp, longName, ogrn, okpo, okved, phone, shortName, view, firmDataRequestDtoSet);
     }
 }

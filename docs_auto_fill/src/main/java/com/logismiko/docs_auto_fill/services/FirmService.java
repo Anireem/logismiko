@@ -2,6 +2,7 @@ package com.logismiko.docs_auto_fill.services;
 
 import com.logismiko.docs_auto_fill.api.models.requests.FirmRequestDto;
 import com.logismiko.docs_auto_fill.api.models.responses.FirmResponseDto;
+import com.logismiko.docs_auto_fill.dao.entities.FirmDataEntity;
 import com.logismiko.docs_auto_fill.dao.entities.FirmEntity;
 import com.logismiko.docs_auto_fill.dao.repositories.FirmRepository;
 import com.logismiko.docs_auto_fill.utils.factories.FirmEntityFactory;
@@ -14,6 +15,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
+import java.util.Set;
 
 import static org.springframework.http.HttpStatus.BAD_REQUEST;
 import static org.springframework.http.HttpStatus.NOT_FOUND;
@@ -45,6 +47,9 @@ public class FirmService {
      */
     public FirmResponseDto addFirm(final FirmRequestDto firmRequestDto) {
         FirmEntity firmEntity = FirmEntityFactory.create(firmRequestDto);
+        firmEntity
+            .getFirmDataEntities()
+            .forEach(firmDataEntity -> firmDataEntity.setFirmEntity(firmEntity));
         return FirmResponseDtoFactory.create(firmRepository.save(firmEntity));
     }
 

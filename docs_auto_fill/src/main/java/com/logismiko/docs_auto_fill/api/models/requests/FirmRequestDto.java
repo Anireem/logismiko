@@ -5,6 +5,8 @@ import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 
+import java.util.Set;
+
 import static io.swagger.v3.oas.annotations.media.Schema.RequiredMode.REQUIRED;
 
 /**
@@ -51,6 +53,8 @@ public record FirmRequestDto(
     @Schema(description = "Представление",
             example = "Газпром",
             requiredMode = REQUIRED)
-    String view
+    String view,
+
+    Set<FirmDataRequestDto> firmDataRequestDtoSet
 ) {
 }
