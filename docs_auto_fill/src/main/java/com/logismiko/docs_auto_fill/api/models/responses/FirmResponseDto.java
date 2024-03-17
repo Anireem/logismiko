@@ -2,6 +2,8 @@ package com.logismiko.docs_auto_fill.api.models.responses;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 
+import java.util.Set;
+
 /**
  * DTO fore request, consists FirmEntity data.
  */
@@ -44,6 +46,8 @@ public record FirmResponseDto(
     String shortName,
 
     @Schema(description = "Представление", example = "Газпром")
-    String view
+    String view,
+
+    Set<FirmDataResponseDto> firmDataResponseDtoSet
 ) {
 }

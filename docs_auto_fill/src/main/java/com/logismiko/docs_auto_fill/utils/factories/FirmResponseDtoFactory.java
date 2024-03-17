@@ -4,6 +4,8 @@ import com.logismiko.docs_auto_fill.api.models.responses.FirmResponseDto;
 import com.logismiko.docs_auto_fill.dao.entities.FirmEntity;
 import com.logismiko.docs_auto_fill.utils.builders.FirmResponseDtoBuilder;
 
+import java.util.stream.Collectors;
+
 /**
  * The type Firm response dto factory.
  */
@@ -19,6 +21,7 @@ public final class FirmResponseDtoFactory {
      * @return the firm response dto
      */
     public static FirmResponseDto create(FirmEntity firmEntity) {
+
         return FirmResponseDtoBuilder.anFirmResponseDto()
             .withComment(firmEntity.getComment())
             .withContactName(firmEntity.getContactName())
@@ -33,6 +36,11 @@ public final class FirmResponseDtoFactory {
             .withPhone(firmEntity.getPhone())
             .withShortName(firmEntity.getShortName())
             .withView(firmEntity.getView())
-            .build();
+            .withFirmDataResponseDtoSet(firmEntity
+                .getFirmDataEntities()
+                .stream()
+                .map(FirmDataResponseDtoFactory::create)
+                .collect(Collectors.toSet())
+            ).build();
     }
 }
