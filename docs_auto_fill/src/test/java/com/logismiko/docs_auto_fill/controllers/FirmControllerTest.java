@@ -1,13 +1,13 @@
 package com.logismiko.docs_auto_fill.controllers;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.logismiko.docs_auto_fill.api.models.requests.OrganizationRequestDto;
-import com.logismiko.docs_auto_fill.api.models.responses.OrganizationResponseDto;
-import com.logismiko.docs_auto_fill.dao.entities.OrganizationEntity;
-import com.logismiko.docs_auto_fill.services.OrganizationService;
-import com.logismiko.docs_auto_fill.utils.builders.OrganizationRequestDtoBuilder;
-import com.logismiko.docs_auto_fill.utils.factories.OrganizationEntityFactory;
-import com.logismiko.docs_auto_fill.utils.factories.OrganizationResponseDtoFactory;
+import com.logismiko.docs_auto_fill.api.models.requests.FirmRequestDto;
+import com.logismiko.docs_auto_fill.api.models.responses.FirmResponseDto;
+import com.logismiko.docs_auto_fill.dao.entities.FirmEntity;
+import com.logismiko.docs_auto_fill.services.FirmService;
+import com.logismiko.docs_auto_fill.utils.builders.FirmRequestDtoBuilder;
+import com.logismiko.docs_auto_fill.utils.factories.FirmEntityFactory;
+import com.logismiko.docs_auto_fill.utils.factories.FirmResponseDtoFactory;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -33,16 +33,16 @@ import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 
-@WebMvcTest(controllers = OrganizationController.class)
+@WebMvcTest(controllers = FirmController.class)
 @AutoConfigureMockMvc
 @ExtendWith(MockitoExtension.class)
 // TODO: 3/15/2024 сделать правильный наименования методов
-class OrganizationControllerTest {
+class FirmControllerTest {
     @Autowired
     private MockMvc mockMvc;
 
     @MockBean
-    private OrganizationService organizationService;
+    private FirmService firmService;
 
     @Mock
     private Pageable pageable;
@@ -50,19 +50,19 @@ class OrganizationControllerTest {
     @Autowired
     private ObjectMapper objectMapper;
 
-    private OrganizationRequestDto organizationRequestDto;
+    private FirmRequestDto firmRequestDto;
     
-    private OrganizationEntity organizationEntity1;
-    private OrganizationEntity organizationEntity2;
+    private FirmEntity firmEntity1;
+    private FirmEntity firmEntity2;
     
-    private OrganizationResponseDto organizationResponseDto1;
-    private OrganizationResponseDto organizationResponseDto2;
+    private FirmResponseDto firmResponseDto1;
+    private FirmResponseDto firmResponseDto2;
     
-    private List<OrganizationResponseDto> organizationResponseDtoList;
+    private List<FirmResponseDto> firmResponseDtoList;
 
     @BeforeEach
     public void init() {
-        organizationRequestDto = OrganizationRequestDtoBuilder.anOrganizationRequestDto()
+        firmRequestDto = FirmRequestDtoBuilder.anFirmRequestDto()
             .withComment("Неплохой клиент")
             .withContactName("Миллер Алексей")
             .withEmail("gazprom@mail.ru")
@@ -75,27 +75,27 @@ class OrganizationControllerTest {
             .withPhone("8-495-464-41-12")
             .withShortName("ПАО \"Газпром\"")
             .withView("Газпром").build();
-        organizationEntity1 = OrganizationEntityFactory.makeOrganizationEntity(organizationRequestDto);
-        organizationEntity2 = OrganizationEntityFactory.makeOrganizationEntity(organizationRequestDto);
+        firmEntity1 = FirmEntityFactory.create(firmRequestDto);
+        firmEntity2 = FirmEntityFactory.create(firmRequestDto);
         
-        organizationEntity1.setId(1L);
-        organizationEntity2.setId(2L);
-        organizationEntity2.setEmail("mail@gazprom.ru");
+        firmEntity1.setId(1L);
+        firmEntity2.setId(2L);
+        firmEntity2.setEmail("mail@gazprom.ru");
         
-        organizationResponseDto1 = OrganizationResponseDtoFactory.makeOrganizationResponseDto(organizationEntity1);
-        organizationResponseDto2 = OrganizationResponseDtoFactory.makeOrganizationResponseDto(organizationEntity2);
+        firmResponseDto1 = FirmResponseDtoFactory.create(firmEntity1);
+        firmResponseDto2 = FirmResponseDtoFactory.create(firmEntity2);
         
-        organizationResponseDtoList = new ArrayList<OrganizationResponseDto>();
-        organizationResponseDtoList.add(organizationResponseDto1);
-        organizationResponseDtoList.add(organizationResponseDto2);
+        firmResponseDtoList = new ArrayList<FirmResponseDto>();
+        firmResponseDtoList.add(firmResponseDto1);
+        firmResponseDtoList.add(firmResponseDto2);
     }
 
     @Test
-    void addOrganization() throws Exception {
-        when(organizationService.addOrganization(Mockito.any(OrganizationRequestDto.class))).thenReturn(organizationResponseDto1);
-        ResultActions response = mockMvc.perform(post("/api/organizations")
+    void addFirm() throws Exception {
+        when(firmService.addFirm(Mockito.any(FirmRequestDto.class))).thenReturn(firmResponseDto1);
+        ResultActions response = mockMvc.perform(post("/api/firms")
             .contentType(MediaType.APPLICATION_JSON)
-            .content(objectMapper.writeValueAsString(organizationRequestDto)));
+            .content(objectMapper.writeValueAsString(firmRequestDto)));
         response
             .andDo(MockMvcResultHandlers.print())
             .andExpect(MockMvcResultMatchers.status().isCreated());
@@ -103,13 +103,13 @@ class OrganizationControllerTest {
     }
 
     @Test
-    void getOrganizationById() throws Exception {
-        Long organizationId = 1L;
-        when(organizationService.getOrganizationById(organizationId)).thenReturn(organizationResponseDto1);
+    void getFirmById() throws Exception {
+        Long firmId = 1L;
+        when(firmService.getFirmById(firmId)).thenReturn(firmResponseDto1);
 
-        ResultActions response = mockMvc.perform(get("/api/organizations/1")
+        ResultActions response = mockMvc.perform(get("/api/firms/1")
             .contentType(MediaType.APPLICATION_JSON)
-            .content(objectMapper.writeValueAsString(organizationResponseDto1))
+            .content(objectMapper.writeValueAsString(firmResponseDto1))
         );
 
         response
@@ -118,10 +118,10 @@ class OrganizationControllerTest {
     }
 
     @Test
-    void getAllOrganizations() throws Exception {
+    void getAllFirms() throws Exception {
         PageRequest pageable = PageRequest.of(0, 20);
-        when(organizationService.getOrganizations(pageable)).thenReturn(organizationResponseDtoList);
-        ResultActions response = mockMvc.perform(get("/api/organizations")
+        when(firmService.getFirms(pageable)).thenReturn(firmResponseDtoList);
+        ResultActions response = mockMvc.perform(get("/api/firms")
             .contentType(MediaType.APPLICATION_JSON)
         );
 
@@ -132,11 +132,11 @@ class OrganizationControllerTest {
     }
 
     @Test
-    void deleteOrganization() throws Exception {
-        Long organizationId = 1L;
-        doNothing().when(organizationService).deleteOrganization(organizationId);
+    void deleteFirm() throws Exception {
+        Long firmId = 1L;
+        doNothing().when(firmService).deleteFirm(firmId);
 
-        ResultActions response = mockMvc.perform(delete("/api/organizations/1")
+        ResultActions response = mockMvc.perform(delete("/api/firms/1")
             .contentType(MediaType.APPLICATION_JSON)
         );
 

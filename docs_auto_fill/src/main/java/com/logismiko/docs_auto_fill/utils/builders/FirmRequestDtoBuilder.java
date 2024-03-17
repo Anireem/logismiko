@@ -1,14 +1,17 @@
 package com.logismiko.docs_auto_fill.utils.builders;
 
-import com.logismiko.docs_auto_fill.api.models.requests.OrganizationRequestDto;
+import com.logismiko.docs_auto_fill.api.models.requests.FirmDataRequestDto;
+import com.logismiko.docs_auto_fill.api.models.requests.FirmRequestDto;
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 
+import java.util.Set;
+
 import static io.swagger.v3.oas.annotations.media.Schema.RequiredMode.REQUIRED;
 
-public final class OrganizationRequestDtoBuilder {
+public final class FirmRequestDtoBuilder {
     private @Schema(description = "Комментарий", example = "Не приоритетный клиент") String comment;
     private @Schema(description = "Имя контакта", example = "Миллер Алексей") String contactName;
     private @Email(message = "Email должен быть в правильном формате")
@@ -30,75 +33,81 @@ public final class OrganizationRequestDtoBuilder {
         example = "Газпром",
         requiredMode = REQUIRED
     ) String view;
+    private Set<FirmDataRequestDto> firmDataRequestDtoSet;
 
-    private OrganizationRequestDtoBuilder() {
+    private FirmRequestDtoBuilder() {
     }
 
-    public static OrganizationRequestDtoBuilder anOrganizationRequestDto() {
-        return new OrganizationRequestDtoBuilder();
+    public static FirmRequestDtoBuilder anFirmRequestDto() {
+        return new FirmRequestDtoBuilder();
     }
 
-    public OrganizationRequestDtoBuilder withComment(String comment) {
+    public FirmRequestDtoBuilder withComment(String comment) {
         this.comment = comment;
         return this;
     }
 
-    public OrganizationRequestDtoBuilder withContactName(String contactName) {
+    public FirmRequestDtoBuilder withContactName(String contactName) {
         this.contactName = contactName;
         return this;
     }
 
-    public OrganizationRequestDtoBuilder withEmail(String email) {
+    public FirmRequestDtoBuilder withEmail(String email) {
         this.email = email;
         return this;
     }
 
-    public OrganizationRequestDtoBuilder withInn(String inn) {
+    public FirmRequestDtoBuilder withInn(String inn) {
         this.inn = inn;
         return this;
     }
 
-    public OrganizationRequestDtoBuilder withKpp(String kpp) {
+    public FirmRequestDtoBuilder withKpp(String kpp) {
         this.kpp = kpp;
         return this;
     }
 
-    public OrganizationRequestDtoBuilder withLongName(String longName) {
+    public FirmRequestDtoBuilder withLongName(String longName) {
         this.longName = longName;
         return this;
     }
 
-    public OrganizationRequestDtoBuilder withOgrn(String ogrn) {
+    public FirmRequestDtoBuilder withOgrn(String ogrn) {
         this.ogrn = ogrn;
         return this;
     }
 
-    public OrganizationRequestDtoBuilder withOkpo(String okpo) {
+    public FirmRequestDtoBuilder withOkpo(String okpo) {
         this.okpo = okpo;
         return this;
     }
 
-    public OrganizationRequestDtoBuilder withOkved(String okved) {
+    public FirmRequestDtoBuilder withOkved(String okved) {
         this.okved = okved;
         return this;
     }
 
-    public OrganizationRequestDtoBuilder withPhone(String phone) {
+    public FirmRequestDtoBuilder withPhone(String phone) {
         this.phone = phone;
         return this;
     }
 
-    public OrganizationRequestDtoBuilder withShortName(String shortName) {
+    public FirmRequestDtoBuilder withShortName(String shortName) {
         this.shortName = shortName;
         return this;
     }
 
-    public OrganizationRequestDtoBuilder withView(String view) {
+    public FirmRequestDtoBuilder withView(String view) {
         this.view = view;
         return this;
     }
 
-    public OrganizationRequestDto build() {
-        return new OrganizationRequestDto(comment, contactName, email, inn, kpp, longName, ogrn, okpo, okved, phone, shortName, view);
+    public FirmRequestDtoBuilder withFirmDataRequestDtoSet(Set<FirmDataRequestDto> firmDataRequestDtoSet) {
+        this.firmDataRequestDtoSet = firmDataRequestDtoSet;
+        return this;
+    }
+
+    public FirmRequestDto build() {
+        return new FirmRequestDto(comment, contactName, email, inn, kpp, longName, ogrn, okpo, okved, phone, shortName, view, firmDataRequestDtoSet);
     }
 }

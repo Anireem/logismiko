@@ -8,12 +8,12 @@ public final class ApiRoutes {
     }
 
     /**
-     * Represents routes for organization management APIs.
+     * Represents routes for firm management APIs.
      */
-    public final class Organization {
-        private Organization() {
+    public final class Firm {
+        private Firm() {
         }
         public static final String ORGANIZATION_CONTEXT_PATH
-                = "/api/organizations";
+                = "/api/firms";
     }
 }

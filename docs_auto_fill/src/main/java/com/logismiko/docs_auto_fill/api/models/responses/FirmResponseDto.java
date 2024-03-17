@@ -2,10 +2,12 @@ package com.logismiko.docs_auto_fill.api.models.responses;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 
+import java.util.Set;
+
 /**
- * DTO fore request, consists OrganizationEntity data.
+ * DTO fore request, consists FirmEntity data.
  */
-public record OrganizationResponseDto(
+public record FirmResponseDto(
     @Schema(description = "Комментарий", example = "Не приоритетный клиент")
     String comment,
 
@@ -24,10 +26,8 @@ public record OrganizationResponseDto(
     @Schema(description = "КПП", example = "781401001")
     String kpp,
 
-    @Schema(
-        description = "Полное имя",
-        example = "ПУБЛИЧНОЕ АКЦИОНЕРНОЕ ОБЩЕСТВО \"ГАЗПРОМ\""
-    )
+    @Schema(description = "Полное имя",
+            example = "ПУБЛИЧНОЕ АКЦИОНЕРНОЕ ОБЩЕСТВО \"ГАЗПРОМ\"")
     String longName,
 
     @Schema(description = "ОГРН", example = "1027700070518")
@@ -46,6 +46,9 @@ public record OrganizationResponseDto(
     String shortName,
 
     @Schema(description = "Представление", example = "Газпром")
-    String view
+    String view,
+
+    @Schema(description = "Список дополнительных данных")
+    Set<FirmDataResponseDto> firmDataResponseDtoSet
 ) {
 }
