@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.util.UriComponentsBuilder;
 
 /**
- * Represents the endpoint for working with firms.
+ * Represents the endpoint for working with Firms.
  */
 @Tag(
     name = "Endpoint for working with firms",
