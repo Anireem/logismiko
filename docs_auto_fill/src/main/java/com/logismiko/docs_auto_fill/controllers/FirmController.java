@@ -1,5 +1,6 @@
 package com.logismiko.docs_auto_fill.controllers;
 
+import com.logismiko.docs_auto_fill.api.constants.ApiRoutes;
 import com.logismiko.docs_auto_fill.api.endpoints.FirmEndpoint;
 import com.logismiko.docs_auto_fill.api.models.requests.FirmRequestDto;
 import com.logismiko.docs_auto_fill.api.models.responses.FirmResponseDto;
@@ -13,13 +14,11 @@ import org.springframework.web.util.UriComponentsBuilder;
 
 import java.net.URI;
 
-import static com.logismiko.docs_auto_fill.api.constants.ApiRoutes.Firm.ORGANIZATION_CONTEXT_PATH;
-
 /**
  * Represents methods for working with firms.
  */
 @RestController
-@RequestMapping(ORGANIZATION_CONTEXT_PATH)
+@RequestMapping(ApiRoutes.Firm.FIRM_CONTEXT_PATH)
 public class FirmController
     implements FirmEndpoint, ControllerExceptionHandler {
 
@@ -52,7 +51,7 @@ public class FirmController
     ) {
         FirmResponseDto firmResponseDto = firmService.addFirm(firmRequestDto);
         URI location = ucb
-            .path(ORGANIZATION_CONTEXT_PATH + "/{id}")
+            .path(ApiRoutes.Firm.FIRM_CONTEXT_PATH + "/{id}")
             .buildAndExpand(firmResponseDto.id())
             .toUri();
         return ResponseEntity.created(location).build();

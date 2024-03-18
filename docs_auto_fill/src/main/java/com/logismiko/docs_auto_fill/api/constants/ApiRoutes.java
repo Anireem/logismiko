@@ -13,7 +13,15 @@ public final class ApiRoutes {
     public final class Firm {
         private Firm() {
         }
-        public static final String ORGANIZATION_CONTEXT_PATH
-                = "/api/firms";
+        public static final String FIRM_CONTEXT_PATH = "/api/firms";
+    }
+
+    /**
+     * Represents routes for contract management APIs.
+     */
+    public final class Contract {
+        private Contract() {
+        }
+        public static final String CONTRACT_CONTEXT_PATH = "/api/contracts";
     }
 }
