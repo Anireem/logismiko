@@ -19,19 +19,18 @@ import static org.springframework.http.HttpStatus.BAD_REQUEST;
 import static org.springframework.http.HttpStatus.NOT_FOUND;
 
 /**
- * Represents service layer for working with firms.
+ * Represents service layer for working with Firms.
  */
 @Service
 public class FirmService {
-
     /**
-     * Repository for working with firms.
+     * Repository for working with Firms.
      */
     private FirmRepository firmRepository;
 
     /**
      * Constructor, parameters are filled using Dependency Injection.
-     * @param firmRepository Repository for working with firms.
+     * @param firmRepository Repository for working with Firms.
      */
     @Autowired
     public FirmService(final FirmRepository firmRepository) {
@@ -39,9 +38,9 @@ public class FirmService {
     }
 
     /**
-     * Adds firm to database.
-     * @param firmRequestDto DTO for firm creation.
-     * @return DTO of a newly created firm.
+     * Adds Firm to database.
+     * @param firmRequestDto DTO for Firm creation.
+     * @return DTO of a newly created Firm.
      */
     public FirmResponseDto addFirm(final FirmRequestDto firmRequestDto) {
         FirmEntity firmEntity = FirmEntityFactory.create(firmRequestDto);
@@ -49,9 +48,9 @@ public class FirmService {
     }
 
     /**
-     * Retrieves firm from database by id.
+     * Retrieves Firm from database by id.
      * @param id Firm ID.
-     * @return Found firm DTO.
+     * @return Found Firm DTO.
      */
     public FirmResponseDto getFirmById(final Long id) {
         FirmEntity firmEntity = firmRepository.findById(id).orElseThrow(
@@ -63,9 +62,9 @@ public class FirmService {
     }
 
     /**
-     * Returns page of firms as list of firm response DTOs.
+     * Returns page of Firms as list of Firm response DTOs.
      * @param pageable consists page number, size and sort type.
-     * @return list of firm response DTOs.
+     * @return list of Firm response DTOs.
      */
     public List<FirmResponseDto> getFirms(
         final Pageable pageable
@@ -78,8 +77,8 @@ public class FirmService {
     }
 
     /**
-     * Remove firm from database if it exists.
-     * @param id ID of the firm to be deleted.
+     * Remove Firm from database if it exists.
+     * @param id ID of the Firm to be deleted.
      */
     public void deleteFirm(final Long id) {
         if (firmRepository.existsById(id)) {
@@ -91,11 +90,10 @@ public class FirmService {
     }
 
     //region Private methods
-
     /**
-     * Private method, retrieves a page with firms.
+     * Private method, retrieves a page with Firms.
      * @param pageable Consists page number, size and sort type.
-     * @return Page with firms.
+     * @return Page with Firms.
      */
     private Page<FirmEntity> retrieveFirms(final Pageable pageable) {
         try {
@@ -103,10 +101,9 @@ public class FirmService {
         } catch (PropertyReferenceException propertyReferenceException) {
             throw new ResponseStatusException(
                 BAD_REQUEST,
-                "Error retrieving firms",
+                "Error retrieving Firms",
                 propertyReferenceException);
         }
     }
-
     //endregion
 }

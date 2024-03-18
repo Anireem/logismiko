@@ -15,7 +15,7 @@ import org.springframework.web.util.UriComponentsBuilder;
 import java.net.URI;
 
 /**
- * Represents methods for working with firms.
+ * Represents methods for working with Firms.
  */
 @RestController
 @RequestMapping(ApiRoutes.Firm.FIRM_CONTEXT_PATH)
@@ -23,13 +23,13 @@ public class FirmController
     implements FirmEndpoint, ControllerExceptionHandler {
 
     /**
-     * Service layer for working with firms.
+     * Service layer for working with Firms.
      */
     private final FirmService firmService;
 
     /**
      * Constructor, parameters are filled using Dependency Injection.
-     * @param firmService Service layer for working with firms.
+     * @param firmService Service layer for working with Firms.
      */
     @Autowired
     public FirmController(final FirmService firmService) {
@@ -37,8 +37,8 @@ public class FirmController
     }
 
     /**
-     * Adds firm to the database.
-     * @param firmRequestDto DTO for creating a firm.
+     * Adds Firm to the database.
+     * @param firmRequestDto DTO for creating a Firm.
      * @param ucb Service parameter, filled in automatically,
      * @return ResponseEntity with code 200 (with a link to a new element),
      * or with code 400.
@@ -58,9 +58,9 @@ public class FirmController
     }
 
     /**
-     * Get firm by ID.
+     * Get Firm by ID.
      * @param id Firm ID.
-     * @return ResponseEntity with code 200 and body containing the firm's DTO.
+     * @return ResponseEntity with code 200 and body containing the Firm's DTO.
      */
     @GetMapping("/{id}")
     @Override
@@ -69,10 +69,10 @@ public class FirmController
     }
 
     /**
-     * Returns page of firms as list of firm response DTOs.
+     * Returns page of Firms as list of Firm response DTOs.
      * @param pageable consists page number (0-default), size (20-default
      *                 and sort type (no sort - default).
-     * @return list of firm response DTOs.
+     * @return list of Firm response DTOs.
      */
     @GetMapping
     @Override
@@ -83,11 +83,12 @@ public class FirmController
     }
 
     /**
-     * Delete firm by ID from database.
-     * @param id firm ID.
+     * Delete Firm by ID from database.
+     * @param id Firm ID.
      * @return ResponseEntity with code 204, without extra content.
      */
     @DeleteMapping("/{id}")
+    @Override
     public ResponseEntity<Void> deleteFirm(final Long id) {
         firmService.deleteFirm(id);
         return ResponseEntity.noContent().build();
