@@ -19,5 +19,4 @@ public final class ContractEntityFactory {
             .withComment(contractRequestDto.comment())
             .build();
     }
-
 }

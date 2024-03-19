@@ -1,12 +1,11 @@
 package com.logismiko.docs_auto_fill.dao.entities;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDateTime;
+import java.util.LinkedHashSet;
+import java.util.Set;
 
 @Entity
 public class ContractEntity {
@@ -28,6 +27,9 @@ public class ContractEntity {
     private Long sum;
     private String currency;
     private String comment;
+
+    @OneToMany(mappedBy = "contractEntity", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Set<ContractDataEntity> contractDataEntities = new LinkedHashSet<>();
 
     public Long getId() {
         return id;

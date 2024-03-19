@@ -4,7 +4,7 @@ import com.logismiko.docs_auto_fill.api.models.responses.ContractResponseDto;
 import com.logismiko.docs_auto_fill.dao.entities.ContractEntity;
 import com.logismiko.docs_auto_fill.utils.builders.ContractResponseDtoBuilder;
 
-public class ContractResponseDtoFactory {
+public final class ContractResponseDtoFactory {
     private ContractResponseDtoFactory() {
     }
 
