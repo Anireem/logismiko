@@ -4,6 +4,7 @@ import io.swagger.v3.oas.annotations.media.Schema;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.util.Set;
 
 /**
  * A DTO for the {@link com.logismiko.docs_auto_fill.dao.entities.ContractEntity} entity
@@ -28,6 +29,9 @@ public record ContractRequestDto(
     String currency,
 
     @Schema(description = "Comment", example = "Important contract.")
-    String comment
+    String comment,
+
+    @Schema(description = "Additional data sheet")
+    Set<ContractDataRequestDto> contractDataRequestDtoSet
 ) implements Serializable {
 }

@@ -39,7 +39,7 @@ public class ContractService {
 
     public ContractResponseDto addContract(ContractRequestDto contractRequestDto) {
         ContractEntity contractEntity = contractRepository.save(
-            ContractEntityFactory.make(contractRequestDto)
+            ContractEntityFactory.create(contractRequestDto)
         );
         return ContractResponseDtoFactory.make(contractEntity);
     }

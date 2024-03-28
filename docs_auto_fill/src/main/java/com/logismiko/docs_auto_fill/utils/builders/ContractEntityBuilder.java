@@ -1,8 +1,11 @@
 package com.logismiko.docs_auto_fill.utils.builders;
 
+import com.logismiko.docs_auto_fill.dao.entities.ContractDataEntity;
 import com.logismiko.docs_auto_fill.dao.entities.ContractEntity;
 
 import java.time.LocalDateTime;
+import java.util.LinkedHashSet;
+import java.util.Set;
 
 public final class ContractEntityBuilder {
     private Long id;
@@ -13,6 +16,7 @@ public final class ContractEntityBuilder {
     private Long sum;
     private String currency;
     private String comment;
+    private Set<ContractDataEntity> contractDataEntities = new LinkedHashSet<>();
 
     private ContractEntityBuilder() {
     }
@@ -61,6 +65,11 @@ public final class ContractEntityBuilder {
         return this;
     }
 
+    public ContractEntityBuilder withContractDataEntities(Set<ContractDataEntity> contractDataEntities) {
+        this.contractDataEntities = contractDataEntities;
+        return this;
+    }
+
     public ContractEntity build() {
         ContractEntity contractEntity = new ContractEntity();
         contractEntity.setId(id);
@@ -71,6 +80,7 @@ public final class ContractEntityBuilder {
         contractEntity.setSum(sum);
         contractEntity.setCurrency(currency);
         contractEntity.setComment(comment);
+        contractEntity.setContractDataEntities(contractDataEntities);
         return contractEntity;
     }
 }

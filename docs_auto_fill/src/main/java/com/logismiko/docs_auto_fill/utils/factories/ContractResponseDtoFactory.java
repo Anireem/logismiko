@@ -4,6 +4,8 @@ import com.logismiko.docs_auto_fill.api.models.responses.ContractResponseDto;
 import com.logismiko.docs_auto_fill.dao.entities.ContractEntity;
 import com.logismiko.docs_auto_fill.utils.builders.ContractResponseDtoBuilder;
 
+import java.util.stream.Collectors;
+
 public final class ContractResponseDtoFactory {
     private ContractResponseDtoFactory() {
     }
@@ -18,6 +20,10 @@ public final class ContractResponseDtoFactory {
             .withSum(contractEntity.getSum())
             .withCurrency(contractEntity.getCurrency())
             .withComment(contractEntity.getComment())
-            .build();
+            .withContractDataResponseDtoSet(contractEntity.getContractDataEntities()
+                .stream()
+                .map(ContractDataResponseDtoFactory::create)
+                .collect(Collectors.toSet())
+            ).build();
     }
 }

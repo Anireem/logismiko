@@ -15,6 +15,7 @@ public class ContractDataEntity {
     @JoinColumn(name = "contact_entity_id")
     private ContractEntity contractEntity;
 
+    //region Getters and setters
     public Long getId() {
         return id;
     }
@@ -38,4 +39,13 @@ public class ContractDataEntity {
     public void setDescription(String description) {
         this.description = description;
     }
+
+    public ContractEntity getContractEntity() {
+        return contractEntity;
+    }
+
+    public void setContractEntity(ContractEntity contractEntity) {
+        this.contractEntity = contractEntity;
+    }
+    //endregion
 }

@@ -31,6 +31,7 @@ public class ContractEntity {
     @OneToMany(mappedBy = "contractEntity", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<ContractDataEntity> contractDataEntities = new LinkedHashSet<>();
 
+    //region Getters and setters
     public Long getId() {
         return id;
     }
@@ -94,4 +95,13 @@ public class ContractEntity {
     public void setComment(String comment) {
         this.comment = comment;
     }
+
+    public Set<ContractDataEntity> getContractDataEntities() {
+        return contractDataEntities;
+    }
+
+    public void setContractDataEntities(Set<ContractDataEntity> contractDataEntities) {
+        this.contractDataEntities = contractDataEntities;
+    }
+    //endregion
 }

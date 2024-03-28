@@ -1,8 +1,10 @@
 package com.logismiko.docs_auto_fill.utils.builders;
 
+import com.logismiko.docs_auto_fill.api.models.responses.ContractDataResponseDto;
 import com.logismiko.docs_auto_fill.api.models.responses.ContractResponseDto;
 
 import java.time.LocalDateTime;
+import java.util.Set;
 
 public final class ContractResponseDtoBuilder {
     private Long id;
@@ -13,6 +15,7 @@ public final class ContractResponseDtoBuilder {
     private Long sum;
     private String currency;
     private String comment;
+    private Set<ContractDataResponseDto> contractDataResponseDtoSet;
 
     private ContractResponseDtoBuilder() {
     }
@@ -61,7 +64,12 @@ public final class ContractResponseDtoBuilder {
         return this;
     }
 
+    public ContractResponseDtoBuilder withContractDataResponseDtoSet(Set<ContractDataResponseDto> contractDataResponseDtoSet) {
+        this.contractDataResponseDtoSet = contractDataResponseDtoSet;
+        return this;
+    }
+
     public ContractResponseDto build() {
-        return new ContractResponseDto(id, number, agreement, start, expiration, sum, currency, comment);
+        return new ContractResponseDto(id, number, agreement, start, expiration, sum, currency, comment, contractDataResponseDtoSet);
     }
 }
