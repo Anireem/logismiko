@@ -33,11 +33,17 @@ public class ContractService {
      * @param contractRepository Repository for working with Contracts.
      */
     @Autowired
-    public ContractService(ContractRepository contractRepository) {
+    public ContractService(final ContractRepository contractRepository) {
         this.contractRepository = contractRepository;
     }
 
-    public ContractResponseDto addContract(ContractRequestDto contractRequestDto) {
+    /**
+     * Adds Contract to database.
+     * @param contractRequestDto DTO for Contract creation.
+     * @return DTO of a newly created Contract.
+     */
+    public ContractResponseDto
+    addContract(final ContractRequestDto contractRequestDto) {
         ContractEntity contractEntity = contractRepository.save(
             ContractEntityFactory.create(contractRequestDto)
         );
@@ -49,10 +55,10 @@ public class ContractService {
      * @param id Contract ID.
      * @return Found Contract DTO.
      */
-    public ContractResponseDto getContractById(Long id) {
-        ContractEntity contractEntity = contractRepository.findById(id).orElseThrow(
-            () -> new ResponseStatusException(NOT_FOUND)
-        );
+    public ContractResponseDto getContractById(final Long id) {
+        ContractEntity contractEntity = contractRepository
+            .findById(id)
+            .orElseThrow(() -> new ResponseStatusException(NOT_FOUND));
         return ContractResponseDtoFactory.make(contractEntity);
     }
 
