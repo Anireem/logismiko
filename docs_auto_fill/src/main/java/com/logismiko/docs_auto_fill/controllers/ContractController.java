@@ -19,12 +19,13 @@ import java.net.URI;
  */
 @RestController
 @RequestMapping(ApiRoutes.Contract.CONTRACT_CONTEXT_PATH)
-public class ContractController implements ContractEndpoint, ControllerExceptionHandler {
+public class ContractController
+    implements ContractEndpoint, ControllerExceptionHandler {
 
     /**
      * Service layer for working with Contracts.
      */
-    ContractService contractService;
+    private final ContractService contractService;
 
     /**
      * Constructor, parameters are filled using Dependency Injection.
@@ -48,7 +49,8 @@ public class ContractController implements ContractEndpoint, ControllerException
         final ContractRequestDto contractRequestDto,
         final UriComponentsBuilder ucb
     ) {
-        ContractResponseDto contractResponseDto = contractService.addContract(contractRequestDto);
+        ContractResponseDto contractResponseDto =
+            contractService.addContract(contractRequestDto);
         URI location = ucb
             .path(ApiRoutes.Contract.CONTRACT_CONTEXT_PATH + "/{id}")
             .buildAndExpand(contractResponseDto.id())
@@ -59,7 +61,7 @@ public class ContractController implements ContractEndpoint, ControllerException
     /**
      * Get Contract by ID.
      * @param id Contract ID.
-     * @return ResponseEntity with code 200 and body containing the Contracts's DTO.
+     * @return ResponseEntity with code 200 and body containing Contract's DTO.
      */
     @GetMapping("/{id}")
     @Override
@@ -75,7 +77,8 @@ public class ContractController implements ContractEndpoint, ControllerException
      */
     @GetMapping
     @Override
-    public ResponseEntity<Iterable<ContractResponseDto>> getContracts(Pageable pageable) {
+    public ResponseEntity<Iterable<ContractResponseDto>>
+    getContracts(final Pageable pageable) {
         return ResponseEntity.ok(contractService.getContracts(pageable));
     }
 
@@ -86,7 +89,7 @@ public class ContractController implements ContractEndpoint, ControllerException
      */
     @DeleteMapping("/{id}")
     @Override
-    public ResponseEntity<Void> deleteContract(Long id) {
+    public ResponseEntity<Void> deleteContract(final Long id) {
         contractService.deleteContract(id);
         return ResponseEntity.noContent().build();
     }
